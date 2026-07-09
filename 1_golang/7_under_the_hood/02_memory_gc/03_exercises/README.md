@@ -1,0 +1,3 @@
+# Упражнения: memory and gc
+
+Запуск: `go run ./03_exercises/01_stack_vs_heap` ...

@@ -1,0 +1,3 @@
+# Упражнения: System Apps
+
+Запуск: `go run ./03_exercises/01_signal_handling` ...

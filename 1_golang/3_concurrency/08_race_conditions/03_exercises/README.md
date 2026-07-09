@@ -1,0 +1,3 @@
+# Упражнения: race_conditions
+
+Запуск: `go run ./03_exercises/01_detect_race` ...

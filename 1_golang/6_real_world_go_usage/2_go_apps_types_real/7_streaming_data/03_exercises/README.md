@@ -1,0 +1,3 @@
+# Упражнения: Streaming Data
+
+Запуск: `go run ./03_exercises/01_decode_message` ...

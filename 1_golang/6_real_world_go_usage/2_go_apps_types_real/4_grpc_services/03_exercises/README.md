@@ -1,0 +1,3 @@
+# Упражнения: gRPC Services
+
+Запуск: `go run ./03_exercises/01_status_codes` ...

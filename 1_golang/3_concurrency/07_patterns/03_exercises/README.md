@@ -1,0 +1,3 @@
+# Упражнения: patterns
+
+Запуск: `go run ./03_exercises/01_worker_pool` ...

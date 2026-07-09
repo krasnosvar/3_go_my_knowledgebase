@@ -1,0 +1,1 @@
+{ "Servers": { "1": { "Name": "PgBouncer", "Group": "Servers", "Host": "pgbouncer", "Port": 6432, "MaintenanceDB": "primary", "Username": "postgres", "SSLMode": "prefer", "ConnectionParameters": { "sslmode": "prefer", "passfile": "/pgadmin4/pgpass" } } } }

@@ -1,0 +1,2 @@
+"postgres" "md5244af1e2823d5eaeeffc42c5096d8260"  # password: admin
+"admin" "md5f6fdffe48c908deb0f4c3bd36c032e72"    # password: admin

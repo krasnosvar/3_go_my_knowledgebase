@@ -1,0 +1,3 @@
+# Упражнения: fmt_and_output
+
+Запуск: `go run ./03_exercises/01_print` ...

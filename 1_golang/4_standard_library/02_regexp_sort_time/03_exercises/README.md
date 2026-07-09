@@ -1,0 +1,3 @@
+# Упражнения: regexp, sort, time
+
+Запуск: `go run ./03_exercises/01_regex_email` ...

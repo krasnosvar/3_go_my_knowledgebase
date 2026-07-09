@@ -1,0 +1,23 @@
+# Docker Compose для практики SQL JOIN'ов
+# Запуск:   docker compose up -d
+# Подключение: psql -h localhost -p 5433 -U dev -d join_practice
+# Пароль: devpass
+# Остановка: docker compose down -v
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: join_practice_db
+    environment:
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: join_practice
+    ports:
+      - "5433:5432" # 5433, чтобы не конфликтовать с локальным PostgreSQL
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U dev -d join_practice" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5

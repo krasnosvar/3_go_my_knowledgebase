@@ -1,0 +1,3 @@
+# Упражнения: Set (Go)
+
+Запуск: `go run ./03_exercises/01_deduplicate` ...

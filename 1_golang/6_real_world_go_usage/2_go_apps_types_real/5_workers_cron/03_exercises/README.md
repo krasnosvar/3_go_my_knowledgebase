@@ -1,0 +1,3 @@
+# Упражнения: Workers and Cron
+
+Запуск: `go run ./03_exercises/01_job_queue` ...

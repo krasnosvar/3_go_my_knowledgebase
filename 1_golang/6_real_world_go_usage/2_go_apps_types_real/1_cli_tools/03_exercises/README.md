@@ -1,0 +1,3 @@
+# Упражнения: CLI Tools
+
+Запуск: `go run ./03_exercises/01_arg_parse` ...

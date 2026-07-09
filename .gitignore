@@ -1,0 +1,29 @@
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs and temporary files
+*.log
+*.tmp
+tmp/
+
+# Go build/test artifacts
+bin/
+dist/
+*.test
+*.out
+coverage.out
+
+# Common local binaries produced by `go build`
+crud-service
+
+# Local Docker/database data
+clickhouse_data/
+pgdata/
+pg_replica_data/
+postgres_data/
+redis_data/
+mongo_data/

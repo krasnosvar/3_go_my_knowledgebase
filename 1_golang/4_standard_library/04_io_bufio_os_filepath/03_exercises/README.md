@@ -1,0 +1,3 @@
+# Упражнения: io, bufio, os, filepath
+
+Запуск: `go run ./03_exercises/01_reader_copy` ...

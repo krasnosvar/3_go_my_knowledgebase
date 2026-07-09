@@ -1,0 +1,3 @@
+# Упражнения: runtime internals
+
+Запуск: `go run ./03_exercises/01_goroutine_states` ...

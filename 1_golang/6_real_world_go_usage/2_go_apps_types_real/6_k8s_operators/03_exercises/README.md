@@ -1,0 +1,3 @@
+# Упражнения: Kubernetes Operators
+
+Запуск: `go run ./03_exercises/01_reconcile_idempotent` ...

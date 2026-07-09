@@ -1,0 +1,3 @@
+# Упражнения: encoding/json, encoding/csv, base64
+
+Запуск: `go run ./03_exercises/01_json_tags` ...

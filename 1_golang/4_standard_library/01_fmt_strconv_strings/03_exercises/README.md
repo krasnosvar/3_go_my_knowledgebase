@@ -1,0 +1,3 @@
+# Упражнения: fmt, strconv, strings
+
+Запуск: `go run ./03_exercises/01_printf_table` ...

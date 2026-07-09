@@ -1,0 +1,40 @@
+# Тема 01. Переменные и константы (Variables & Constants)
+
+Этот раздел посвящен базовым механизмам объявления переменных и констант в Go, правилам областей видимости и типичным ловушкам рантайма (таким как shadowing).
+
+## 🗂 Структура раздела
+
+*   **[01_theory/](./01_theory/)** — теория:
+    *   [01_vars_and_zero_values.md](./01_theory/01_vars_and_zero_values.md) — объявление переменных (`var` vs `:=`), правило краткого объявления и нулевые значения (zero values).
+    *   [02_reserved_keywords.md](./01_theory/02_reserved_keywords.md) — 25 зарезервированных ключевых слов Go и их назначение.
+    *   [03_var_short_decl_scope.md](./01_theory/03_var_short_decl_scope.md) — подробно о `var`, `:=`, области видимости и неиспользуемых переменных.
+    *   [04_constants_iota.md](./01_theory/04_constants_iota.md) — константы, untyped-константы и генератор последовательностей `iota`.
+    *   [05_shadowing.md](./01_theory/05_shadowing.md) — затенение переменных (shadowing), ловушка с `err` и как её избегать.
+    *   [06_use_cases.md](./01_theory/06_use_cases.md) — практические сценарии: конфигурационные константы, enum-статусы, битовые флаги, глобальные и локальные переменные.
+*   **[02_examples/](./02_examples/)** — практические примеры:
+    *   [01_cli_utilities](./02_examples/01_cli_utilities/main.go) — инициализация конфигураций CLI-утилит (понимание `var` vs `:=`).
+    *   [02_system_infrastructure](./02_examples/02_system_infrastructure/main.go) — статусы серверов на базе перечислений `iota`.
+    *   [03_product_backend](./02_examples/03_product_backend/main.go) — битовые маски прав доступа с помощью `iota`.
+*   **[03_exercises/](./03_exercises/)** — интерактивные задачи для самопроверки с автопроверками `PASS`/`FAIL`:
+    *   `01_var_decl` — базовое объявление переменных.
+    *   `02_short_decl` — краткая форма `:=`.
+    *   `03_const` — объявление констант.
+    *   `04_iota` — генерация последовательности.
+    *   `05_zero_values` — проверка дефолтных нулевых значений.
+    *   `06_scope` — область видимости.
+    *   `07_shadowing` — **исправление ловушки затенения переменной (баг при инициализации базы данных)**.
+    *   `08_group_decl` — групповое объявление `var (...)`.
+*   **[04_exercises_answers/](./04_exercises_answers/)** — эталонные решения.
+
+## 🚀 Как проходить тему
+
+1. Прочитайте главный учебник по переменным: [01_vars_and_zero_values.md](./01_theory/01_vars_and_zero_values.md).
+2. Запустите и изучите примеры из папки `02_examples/` через `go run`:
+   ```bash
+   go run ./02_examples/01_cli_utilities/main.go
+   ```
+3. Выполните задачи в `03_exercises/`. Запустите встроенный тест для самопроверки:
+   ```bash
+   go run ./03_exercises/07_shadowing/main.go
+   ```
+4. Сверьтесь с эталонными ответами в `04_exercises_answers/`.

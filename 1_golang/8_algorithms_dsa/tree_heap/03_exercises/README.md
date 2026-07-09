@@ -1,0 +1,3 @@
+# Упражнения: Tree and Heap (Go)
+
+Запуск: `go run ./03_exercises/01_tree_height` ...

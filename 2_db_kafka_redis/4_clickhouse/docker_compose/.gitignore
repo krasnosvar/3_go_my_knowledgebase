@@ -1,0 +1,4 @@
+clickhouse_data/
+pgdata/
+pg_replica_data/
+*.log
