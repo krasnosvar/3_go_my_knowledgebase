@@ -48,12 +48,14 @@ func bytes2string(b []byte) string {
 
 Документация Go даёт **6 разрешённых сценариев** для `unsafe.Pointer`. Любой другой — UB:
 
-1. Конвертация `*T1` → `unsafe.Pointer` → `*T2`, если `T1` и `T2` совместимы по layout.
-2. Конвертация в `uintptr` для арифметики и обратно — в одной строке выражения.
-3. Конвертация для системных вызовов через `syscall.Syscall`.
-4. Конвертация `reflect.Value.Pointer()` или `UnsafePointer()` в `unsafe.Pointer`.
-5. Конвертация `reflect.SliceHeader` или `StringHeader` (legacy, теперь предпочтительны `unsafe.Slice`/`unsafe.String`).
-6. Использование с `Sizeof/Alignof/Offsetof`.
+1. Конвертация `*T1` → `unsafe.Pointer` → `*T2`, если `T2` не больше `T1` и layout совместим.
+2. Конвертация `unsafe.Pointer` → `uintptr` (только чтобы напечатать/сравнить адрес; обратно в указатель — нельзя).
+3. `unsafe.Pointer` → `uintptr` → арифметика → `unsafe.Pointer` — в одном выражении (сейчас удобнее `unsafe.Add`).
+4. Конвертация в `uintptr` прямо в аргументах вызова `syscall.Syscall`.
+5. Результат `reflect.Value.Pointer()` или `UnsafeAddr()` (`uintptr`) → `unsafe.Pointer` сразу после вызова.
+6. Поле `Data` у `reflect.SliceHeader` / `StringHeader` ↔ `unsafe.Pointer` (legacy, теперь предпочтительны `unsafe.Slice`/`unsafe.String`).
+
+`unsafe.Sizeof`/`Alignof`/`Offsetof` в этот список не входят: они вычисляются при компиляции и безопасны.
 
 Любое другое — рискованно. GC может перемещать объекты, и сохранённый `uintptr` станет dangling.
 

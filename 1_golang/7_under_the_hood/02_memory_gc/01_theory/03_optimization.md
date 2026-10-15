@@ -98,10 +98,11 @@ type Good struct {
 ## GOMEMLIMIT в Kubernetes
 
 ```
-GOMEMLIMIT=$(awk '/^MemTotal/ {print int($2*0.85)"KiB"}' /proc/meminfo)
+# cgroup v2: лимит контейнера в байтах ("max" — лимита нет)
+GOMEMLIMIT=$(awk '{printf "%dB", $1*0.85}' /sys/fs/cgroup/memory.max)
 ```
 
-Помогает GC не превысить pod-лимит и избежать OOM kill.
+Помогает GC не превысить pod-лимит и избежать OOM kill. `/proc/meminfo` здесь не годится: внутри контейнера `MemTotal` — память всего узла, а не лимит pod'а. Альтернатива — передать `limits.memory` в env через Downward API (`resourceFieldRef`).
 
 ## Правило
 

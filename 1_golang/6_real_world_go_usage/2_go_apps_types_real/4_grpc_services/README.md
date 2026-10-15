@@ -2,6 +2,8 @@
 
 Ключевые идеи gRPC-сервиса без внешних зависимостей: status codes, deadlines, валидация, цепочка интерсепторов, metadata, стриминг, ретраи, health.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#4-grpc-services) — раздел «4. gRPC services» общей шпаргалки типов Go-приложений.
+
 ## Пререквизиты
 
 [2_backend](../2_backend/), [3_concurrency/05_context](../../../3_concurrency/05_context/).

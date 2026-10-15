@@ -2,6 +2,8 @@
 
 Системные утилиты и демоны: сигналы, упорядоченная остановка, PID-файл, пути к конфигу, логи в stderr, работа с ФС, внешние процессы и probe.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#3-system-apps) — раздел «3. System apps» общей шпаргалки типов Go-приложений.
+
 ## Пререквизиты
 
 [1_cli_tools](../1_cli_tools/), [3_concurrency/05_context](../../../3_concurrency/05_context/).

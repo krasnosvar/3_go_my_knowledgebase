@@ -139,7 +139,7 @@ func retry(ctx context.Context, attempts int, base time.Duration, do func() erro
 		if err = do(); err == nil || !errors.Is(err, errTemporary) {
 			return err // успех или fatal-ошибка — не повторяем
 		}
-		backoff := base << i                                     // экспонента: base, 2·base, 4·base…
+		backoff := base << i                                      // экспонента: base, 2·base, 4·base…
 		backoff += time.Duration(rand.Int64N(int64(backoff) / 2)) // jitter
 		select {
 		case <-ctx.Done():

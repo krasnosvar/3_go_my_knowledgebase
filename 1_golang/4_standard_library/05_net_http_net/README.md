@@ -2,6 +2,8 @@
 
 `net/http` — основа большинства Go-сервисов: хендлеры, роутинг, клиенты с таймаутами, graceful shutdown, health-эндпоинты. Пакет `net` — уровень ниже: TCP-слушатели и соединения. Все упражнения работают локально (`httptest`, `127.0.0.1:0`) без внешней сети.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — сервер (`ServeMux` 1.22+, таймауты, shutdown), клиент, `net` TCP/UDP, ловушки.
+
 ## 🧭 Пререквизиты
 
 - [03_encoding_json_csv_base64](../03_encoding_json_csv_base64/) — JSON

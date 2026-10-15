@@ -6,6 +6,8 @@
 
 **Пререквизиты:** [01_goroutines](../01_goroutines/), [02_channels](../02_channels/), [03_select](../03_select/).
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — что выбрать, `WaitGroup`, `Mutex`/`RWMutex`, `Once`/`OnceValue`, `Cond`, `Pool`, ловушки.
+
 ## 🗂 Структура раздела
 
 *   **[01_theory/](./01_theory/)** — теория:

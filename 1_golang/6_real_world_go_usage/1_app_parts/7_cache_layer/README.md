@@ -2,6 +2,8 @@
 
 Кеш как декоратор репозитория: cache-aside, инвалидация на записи, negative caching и TTL с jitter.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#7-cache-layer) — раздел «7. Cache layer» общей шпаргалки частей приложения.
+
 ## Пререквизиты
 
 [3_repository_layer](../3_repository_layer/); подробнее о кешировании — [3_system_design/03_caching](../../../../3_system_design/03_caching/).

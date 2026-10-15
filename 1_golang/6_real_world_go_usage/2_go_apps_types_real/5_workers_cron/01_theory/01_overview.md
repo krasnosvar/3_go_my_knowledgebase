@@ -43,7 +43,7 @@ for attempt := 1; attempt <= maxAttempts; attempt++ {
     err := do()
     if err == nil { return nil }
     if !isRetriable(err) { return err }
-    backoff := time.Duration(attempt) * baseBackoff + jitter()
+    backoff := baseBackoff<<(attempt-1) + jitter() // base, 2·base, 4·base…
     select {
     case <-ctx.Done(): return ctx.Err()
     case <-time.After(backoff): // continue
@@ -89,8 +89,8 @@ Ticker не учитывает время выполнения предыдущ�
 - `robfig/cron/v3` — стандарт de-facto.
 
 ```go
-c := cron.New()
-c.AddFunc("0 */5 * * * *", func() { runJob() })
+c := cron.New() // 5 полей; для 6 полей с секундами — cron.New(cron.WithSeconds())
+c.AddFunc("*/5 * * * *", func() { runJob() })
 c.Start()
 defer c.Stop()
 ```

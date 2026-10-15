@@ -57,8 +57,11 @@ float64 // IEEE-754 64-bit
 - Нельзя сравнивать на равенство напрямую:
 
 ```go
-var f float64 = 0.1 + 0.2
+a, b := 0.1, 0.2 // переменные float64: сложение в рантайме
+f := a + b
 fmt.Println(f == 0.3) // false
+
+fmt.Println(0.1+0.2 == 0.3) // true: нетипизированные константы считаются точно
 
 const epsilon = 1e-9
 if math.Abs(f-0.3) < epsilon {}

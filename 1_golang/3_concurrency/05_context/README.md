@@ -6,6 +6,8 @@
 
 **Пререквизиты:** [03_select](../03_select/), [04_sync_package](../04_sync_package/).
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — API и версии, правила, таймауты и дедлайны, `Canceled` vs `DeadlineExceeded`, значения, ловушки.
+
 ## 🗂 Структура раздела
 
 *   **[01_theory/](./01_theory/)** — теория:

@@ -71,7 +71,7 @@ err := json.NewDecoder(r.Body).Decode(&in)
 
 ## 8. panic в handler
 
-`panic` в handler по умолчанию убивает только этот запрос (Go runtime в http.Server есть recovery), **но** некоторые middleware-цепочки могут поймать его иначе. Явный `recovery` middleware — must:
+`panic` в handler не роняет процесс: `http.Server` сам ловит её для этого запроса, пишет stack trace в error log и обрывает соединение (HTTP/2 — `RST_STREAM`). Клиент при этом не получает 500, а в логе нет контекста запроса. Явный `recovery` middleware — must:
 
 ```go
 func recovery(next http.Handler) http.Handler {

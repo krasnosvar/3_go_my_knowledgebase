@@ -2,6 +2,8 @@
 
 Фоновая обработка: очереди, пул воркеров, backoff, DLQ, идемпотентность, graceful stop, защита cron от наложения, метрики.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#5-workers-and-cron) — раздел «5. Workers and cron» общей шпаргалки типов Go-приложений.
+
 ## Пререквизиты
 
 [3_concurrency](../../../3_concurrency/) (каналы, `select`, `sync`, `atomic`, `context`).

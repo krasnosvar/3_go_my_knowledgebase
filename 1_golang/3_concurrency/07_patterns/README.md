@@ -6,6 +6,8 @@
 
 **Пререквизиты:** темы [01](../01_goroutines/)–[06](../06_atomic/) этого раздела.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — задача → паттерн, worker pool, fan-out/fan-in, pipeline, semaphore, graceful shutdown, ловушки.
+
 ## 🗂 Структура раздела
 
 *   **[01_theory/](./01_theory/)** — теория:

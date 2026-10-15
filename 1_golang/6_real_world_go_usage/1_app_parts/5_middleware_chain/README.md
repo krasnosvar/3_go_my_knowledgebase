@@ -2,6 +2,8 @@
 
 Middleware — сквозная логика вокруг handler'ов: логирование, recovery, request ID, метрики. Важно понимать порядок цепочки.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#5-middleware-chain) — раздел «5. Middleware chain» общей шпаргалки частей приложения.
+
 ## Пререквизиты
 
 [1_http_handlers](../1_http_handlers/), `context` из [3_concurrency/05_context](../../../3_concurrency/05_context/).

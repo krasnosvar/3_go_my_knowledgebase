@@ -44,7 +44,7 @@ mu.Unlock()
 ## Ловушки
 
 - Всегда ждать в цикле `for !cond`, не в `if`. Spurious wakeup возможен.
-- Держать mutex при `Wait()` обязательно — без него паника.
+- Держать mutex при `Wait()` обязательно — без него `fatal error: sync: unlock of unlocked mutex` (не паника: `recover` не перехватит, процесс завершится).
 - Broadcast разбудит всех, все полезут за mutex — может быть storm.
 
 ## sync.Pool

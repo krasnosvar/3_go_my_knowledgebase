@@ -26,7 +26,7 @@
 | Запуск с детектором | `go run -race ./cmd/app` |
 | Тесты | `go test -race ./...` (в CI: `go test -race -timeout 5m ./...`) |
 | Сборка | `go build -race -o app ./cmd/app` |
-| Отчёт | `WARNING: DATA RACE` + стеки обеих горутин в stderr; тест падает, `go run` выходит с кодом 66 |
+| Отчёт | `WARNING: DATA RACE` + стеки обеих горутин в stderr; тест падает, программа завершается с кодом 66 (`exit status 66`) |
 | Стоимость | CPU и память в 5–10 раз больше → не в проде, обязательно в CI |
 | Исключить файл из `-race` | `//go:build !race` (держать ноль таких) |
 | Не ловит | deadlock, livelock, логические race condition, гонки в непрогнанном коде |

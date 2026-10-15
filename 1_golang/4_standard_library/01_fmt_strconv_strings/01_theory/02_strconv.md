@@ -48,7 +48,7 @@ strconv.Unquote(`"hello\n"`)       // `hello\n` (раскодированное)
 _, err := strconv.Atoi("abc")
 var ne *strconv.NumError
 if errors.As(err, &ne) {
-    fmt.Println(ne.Num, ne.Err) // "abc", syntax error
+    fmt.Println(ne.Num, ne.Err) // abc invalid syntax
 }
 ```
 

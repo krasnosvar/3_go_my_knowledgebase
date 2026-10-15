@@ -187,7 +187,7 @@ clientOpts := options.Client().
   - Равномерное распределение
   - Поддержка частых запросов
 - Range-based vs Hash-based sharding
-- Нельзя изменить shard key после создания
+- Shard key можно уточнить (`refineCollectionShardKey`, MongoDB 4.4+: добавить поля-суффиксы) и сменить целиком (`reshardCollection`, MongoDB 5.0+)
 - Пример плохих ключей: timestamp (монотонный рост), country (низкая кардинальность)
 - Пример хороших ключей: user_id, hashed email
 

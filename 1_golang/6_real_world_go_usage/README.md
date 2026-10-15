@@ -5,6 +5,8 @@
 - в [1_app_parts/](./1_app_parts/) собраны **части приложения** (handler, service, repository, config, middleware, auth, cache, observability) — кубики, которые проектируют через интерфейсы и тестируют по отдельности;
 - в [2_go_apps_types_real/](./2_go_apps_types_real/) — **типы Go-приложений** (CLI, backend API, демоны, gRPC, воркеры, k8s-операторы, стриминг) и их типичные задачи.
 
+**Уже знакомы с темой?** → шпаргалки: [части приложения](./1_app_parts/CHEATSHEET.md) и [типы Go-приложений](./2_go_apps_types_real/CHEATSHEET.md).
+
 ## Пререквизиты
 
 [1_go_basics](../1_go_basics/), [2_oop](../2_oop/) (интерфейсы), [3_concurrency](../3_concurrency/), [4_standard_library](../4_standard_library/), желательно [5_testing](../5_testing/).
@@ -13,7 +15,6 @@
 
 1. [1_app_parts/](./1_app_parts/) — 8 тем по порядку, в каждой: теория, примеры, 4 упражнения с самопроверкой и решения.
 2. [2_go_apps_types_real/](./2_go_apps_types_real/) — 7 типов приложений, в каждом 8 упражнений с самопроверкой и решения.
-3. [2_go_apps_types_real/tasks_from_interview/](./2_go_apps_types_real/tasks_from_interview/) — задачи с собеседований (нужна сеть).
 
 ## Как запускать
 

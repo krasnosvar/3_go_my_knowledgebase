@@ -2,6 +2,8 @@
 
 Логи, метрики и трейсы: структурные логи `slog`, счётчики и гистограммы в формате Prometheus, проброс trace ID.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#8-observability) — раздел «8. Observability» общей шпаргалки частей приложения.
+
 ## Пререквизиты
 
 [5_middleware_chain](../5_middleware_chain/), `sync` из [3_concurrency/04_sync_package](../../../3_concurrency/04_sync_package/).

@@ -4,6 +4,8 @@
 Раздел теоретический: примеры кода — внутри статей, отдельных runnable-примеров
 и упражнений нет.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#05-reflection-и-unsafe) — раздел «05. Reflection и unsafe» общей шпаргалки раздела 7.
+
 ## Зачем
 
 `reflect` лежит в основе `encoding/json`, ORM и валидаторов, а `unsafe` —

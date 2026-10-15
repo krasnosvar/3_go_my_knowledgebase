@@ -2,6 +2,8 @@
 
 Репозиторий прячет хранилище за узким интерфейсом: CRUD, маппинг ошибок драйвера в доменные, пагинация.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#3-repository-layer) — раздел «3. Repository layer» общей шпаргалки частей приложения.
+
 ## Пререквизиты
 
 [2_service_layer](../2_service_layer/), основы SQL из [2_db_kafka_redis/1_postgres](../../../../2_db_kafka_redis/1_postgres/) — желательно.

@@ -2,6 +2,8 @@
 
 Как устроены типичные приложения на Go и какие задачи в них решаются. В каждой папке: обзорная теория, runnable-примеры, 8 упражнений с самопроверкой `PASS`/`FAIL` и решения. Внешние библиотеки (cobra, grpc-go, client-go, kafka-клиенты) не используются: ключевая логика смоделирована на стандартной библиотеке, чтобы всё запускалось офлайн.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — что выбрать, CLI, backend и graceful shutdown, демоны, gRPC-коды, retry/cron, операторы, streaming, ловушки.
+
 ## Пререквизиты
 
 [1_app_parts](../1_app_parts/) и [3_concurrency](../../3_concurrency/).
@@ -15,7 +17,6 @@
 5. [5_workers_cron/](./5_workers_cron/) — воркеры и cron: очереди, пул, backoff, DLQ, идемпотентность, graceful stop.
 6. [6_k8s_operators/](./6_k8s_operators/) — Kubernetes operator: reconcile, conditions, finalizers, requeue, ownerReferences.
 7. [7_streaming_data/](./7_streaming_data/) — стриминг (Kafka/NATS): оффсеты, at-least-once, poison messages, партиции, ребаланс, lag.
-8. [tasks_from_interview/](./tasks_from_interview/) — задачи с собеседований.
 
 ## Как запускать
 

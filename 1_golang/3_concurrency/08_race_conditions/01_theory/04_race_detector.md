@@ -61,7 +61,6 @@ go test -race -timeout 5m ./...
 
 ```go
 //go:build !race
-// +build !race
 ```
 
 Держи таких ровно ноль, если возможно.

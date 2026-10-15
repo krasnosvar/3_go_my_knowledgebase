@@ -2,6 +2,8 @@
 
 Аутентификация (кто ты) и авторизация (что тебе можно): Bearer-токены, подпись HMAC, роли и права на уровне ресурса.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#6-auth-and-permissions) — раздел «6. Auth and permissions» общей шпаргалки частей приложения.
+
 ## Пререквизиты
 
 [5_middleware_chain](../5_middleware_chain/), битовые операции из [1_go_basics/04_operators_bitwise](../../../1_go_basics/04_operators_bitwise/).

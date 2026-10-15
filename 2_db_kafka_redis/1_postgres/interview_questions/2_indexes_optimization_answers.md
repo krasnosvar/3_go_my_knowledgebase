@@ -314,10 +314,10 @@
   -- На основном сервере (postgresql.conf)
   wal_level = replica
   max_wal_senders = 3
-  wal_keep_segments = 32
+  wal_keep_size = 512MB        -- PG 13+; до 13 был wal_keep_segments
   
-  -- На реплике (recovery.conf)
-  standby_mode = 'on'
+  -- На реплике (PG 12+: postgresql.conf + пустой файл standby.signal в каталоге данных;
+  -- recovery.conf и standby_mode удалены в PG 12)
   primary_conninfo = 'host=master port=5432 user=repl_user password=secret'
   restore_command = 'cp /path/to/archive/%f %p'
   ```

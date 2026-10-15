@@ -104,4 +104,4 @@ func handler(w http.ResponseWriter, r *http.Request) {
 - Не ставить таймауты — ждём DoS.
 - Писать в `w` после `WriteHeader` с ошибкой — поздно, заголовки уже отправлены.
 - Забыть `r.Body.Close()` в handler — обычно не критично (сервер сам закрывает), но если читаешь body частично и уходишь — закрой.
-- `panic` в handler убивает весь процесс — нужен recovery middleware.
+- `panic` в handler: `net/http` перехватывает её и закрывает только это соединение (в логе `http: panic serving ...`), клиент получает обрыв вместо ответа; `panic` в горутине, запущенной из handler, убивает весь процесс — нужен recovery middleware (ответ 500 + лог).

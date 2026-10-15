@@ -44,7 +44,7 @@ u.Name() // panic: nil pointer dereference
 func (t *time.Time) ... // не разрешено на чужом типе
 ```
 
-На встроенных и чужих типах методы определять нельзя — нужен свой type alias.
+На встроенных и чужих типах методы определять нельзя — нужен свой именованный тип (`type MyTime time.Time`); alias (`type T = time.Time`) не поможет — это тот же чужой тип.
 
 ## 6. Перегрузка
 
@@ -58,11 +58,20 @@ func (s S) Do(a string) {} // ошибка компиляции
 ## 7. Method value захватывает receiver
 
 ```go
-f := counter.Inc
-counter = Counter{} // f всё ещё бьёт по старому counter
+type Counter struct{ N int }
+
+func (c *Counter) Inc()     { c.N++ }
+func (c Counter) Show() int { return c.N }
+
+var c Counter
+inc := c.Inc   // pointer receiver: запомнен &c
+show := c.Show // value receiver: запомнена копия c
+c = Counter{N: 10}
+inc()
+fmt.Println(c.N, show()) // 11 0
 ```
 
-`f` «зафиксировала» копию (или указатель) на момент создания. Это редко мешает, но знать нужно.
+Receiver вычисляется в момент создания method value: value receiver фиксирует **копию** (`show` не видит новых значений `c`), pointer receiver — **адрес** `&c` (`inc` меняет текущее содержимое `c`). Это редко мешает, но знать нужно.
 
 ## 8. String() с бесконечной рекурсией
 

@@ -6,6 +6,8 @@
 
 **Пререквизиты:** темы [01](../01_goroutines/)–[07](../07_patterns/) этого раздела.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — виды ошибок, race detector, места гонок и фиксы, стратегии, deadlock/livelock/starvation, ловушки.
+
 ## 🗂 Структура раздела
 
 *   **[01_theory/](./01_theory/)** — теория:

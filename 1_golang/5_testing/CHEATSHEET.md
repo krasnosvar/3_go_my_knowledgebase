@@ -124,6 +124,7 @@ func TestParse(t *testing.T) {
 | Варианты входа | `b.Run("large", func(b *testing.B) {...})` |
 | Масштаб по горутинам | `b.RunParallel(func(pb *testing.PB) { for pb.Next() {...} })` |
 | Аллокации без флага | `b.ReportAllocs()` |
+| Аллокации как обычный тест | `if n := testing.AllocsPerRun(100, f); n > 0 { t.Fatalf("allocs = %v", n) }` |
 | Запуск без тестов | `go test -run '^$' -bench . -benchmem` |
 | Сравнение до/после | `go test -bench=. -count=10 > before.txt`; `benchstat before.txt after.txt` (`golang.org/x/perf/cmd/benchstat`) |
 | Escape analysis | `go build -gcflags="-m" ./...` → `moved to heap: x` |

@@ -111,23 +111,25 @@
      - цепочка локальных транзакций
      - для отката используются компенсирующие операции
 
-  Пример 2PC в PostgreSQL:
+  Пример 2PC в PostgreSQL (одна транзакция видит только одну БД, поэтому координатор —
+  приложение — открывает отдельное соединение к каждой БД; нужен `max_prepared_transactions > 0`):
   ```sql
-  -- Начало распределенной транзакции
+  -- Соединение к db1
   BEGIN;
+  INSERT INTO orders VALUES (...);
+  PREPARE TRANSACTION 'tx_42_db1';      -- фаза 1: подготовка
   
-  -- Выполнение операций в разных БД
-  INSERT INTO db1.public.orders VALUES (...);
-  INSERT INTO db2.public.inventory VALUES (...);
+  -- Соединение к db2
+  BEGIN;
+  INSERT INTO inventory VALUES (...);
+  PREPARE TRANSACTION 'tx_42_db2';
   
-  -- Подготовка к фиксации
-  PREPARE TRANSACTION 'transaction_id';
+  -- Фаза 2: все участники подготовились → фиксация в каждой БД
+  COMMIT PREPARED 'tx_42_db1';          -- в db1
+  COMMIT PREPARED 'tx_42_db2';          -- в db2
   
-  -- Фиксация на всех узлах
-  COMMIT PREPARED 'transaction_id';
-  
-  -- Или откат
-  -- ROLLBACK PREPARED 'transaction_id';
+  -- Или откат, если хоть один PREPARE не удался
+  -- ROLLBACK PREPARED 'tx_42_db1';
   ```
 
 ## Проблемы параллелизма
@@ -205,10 +207,15 @@
          INSERT INTO users (email) VALUES ('test@example.com');
      END IF;
      
-     -- Безопасно (использование уникального ограничения)
+     -- Тоже небезопасно: две транзакции могут одновременно не увидеть строку
      INSERT INTO users (email) 
      SELECT 'test@example.com'
      WHERE NOT EXISTS (SELECT 1 FROM users WHERE email='test@example.com');
+     
+     -- Безопасно: уникальное ограничение + ON CONFLICT
+     ALTER TABLE users ADD CONSTRAINT users_email_key UNIQUE (email);
+     INSERT INTO users (email) VALUES ('test@example.com')
+     ON CONFLICT (email) DO NOTHING;
      ```
 
 - **Как работает SELECT FOR UPDATE?**
@@ -226,7 +233,7 @@
   -- Блокировка с пропуском заблокированных строк
   SELECT * FROM orders WHERE status = 'new' FOR UPDATE SKIP LOCKED LIMIT 10;
   
-  -- Блокировка с ожиданием (по умолчанию)
+  -- Без ожидания (по умолчанию FOR UPDATE ждёт снятия блокировки)
   SELECT * FROM products WHERE id = 100 FOR UPDATE NOWAIT; -- Вызовет ошибку при блокировке
   ```
 
@@ -438,8 +445,8 @@ ORDER BY total_sales DESC;
 
 - **Как мониторить производительность запросов?**
   ```sql
-  -- Просмотр медленных запросов (PostgreSQL)
-  SELECT * FROM pg_stat_statements ORDER BY total_time DESC LIMIT 10;
+  -- Просмотр медленных запросов (PostgreSQL 13+; в 12 и раньше столбец назывался total_time)
+  SELECT * FROM pg_stat_statements ORDER BY total_exec_time DESC LIMIT 10;
   
   -- Просмотр использования индексов
   SELECT * FROM pg_stat_user_indexes;
@@ -470,10 +477,10 @@ ORDER BY total_sales DESC;
   ```
 
 - **Как настроить репликацию?**
-  **PostgreSQL (логическая репликация):**
+  **PostgreSQL (физическая потоковая репликация):**
   1. На основном сервере (postgresql.conf):
      ```
-     wal_level = logical
+     wal_level = replica
      max_wal_senders = 10
      max_replication_slots = 10
      ```
@@ -485,11 +492,11 @@ ORDER BY total_sales DESC;
      ```
      host    replication     replicator      replica_ip/32       md5
      ```
-  4. На реплике создать слот репликации:
+  4. На основном сервере создать слот репликации:
      ```sql
      SELECT * FROM pg_create_physical_replication_slot('replica_slot');
      ```
-  5. Запустить репликацию:
+  5. На реплике снять базовую копию и запустить репликацию (`-R` создаёт `standby.signal` и `primary_conninfo`):
      ```bash
      pg_basebackup -h master_host -U replicator -D /var/lib/postgresql/14/main -P -R --slot=replica_slot
      ```

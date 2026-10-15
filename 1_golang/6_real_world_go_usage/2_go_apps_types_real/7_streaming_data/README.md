@@ -2,6 +2,8 @@
 
 Консьюмеры потоков (Kafka/NATS) на модели: строгий разбор, батчинг, коммит оффсетов, at-least-once, poison messages, партиционирование, ребаланс, lag.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#7-streaming-data) — раздел «7. Streaming data» общей шпаргалки типов Go-приложений.
+
 ## Пререквизиты
 
 [5_workers_cron](../5_workers_cron/); теория Kafka — [2_db_kafka_redis/2_kafka_rabbit_nats_redis/1_kafka](../../../../2_db_kafka_redis/2_kafka_rabbit_nats_redis/1_kafka/).

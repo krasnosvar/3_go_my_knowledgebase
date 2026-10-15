@@ -39,7 +39,7 @@ go test -run TestStatus/server
 
 ```go
 for _, tt := range tests {
-    tt := tt
+    tt := tt // нужно только при go < 1.22 в go.mod
     t.Run(tt.name, func(t *testing.T) {
         t.Parallel()
         // ...

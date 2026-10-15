@@ -39,7 +39,9 @@ runtime.Stack(buf, true)     // дамп стеков всех горутин
 
 - `GODEBUG=schedtrace=1000` — раз в секунду лог состояния планировщика.
 - `GODEBUG=gctrace=1` — лог каждого GC цикла.
-- `GODEBUG=allocfreetrace=1` — лог каждой аллокации (очень громко).
+- `GODEBUG=inittrace=1` — время и аллокации каждого `init()`.
+
+`GODEBUG=allocfreetrace=1` (лог каждой аллокации) из runtime удалён — в современных версиях не работает; аллокации смотрите через `pprof` (`allocs`).
 
 Используется на dev/staging, не в prod.
 

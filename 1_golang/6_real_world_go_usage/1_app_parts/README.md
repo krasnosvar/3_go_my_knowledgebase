@@ -2,6 +2,8 @@
 
 Строительные блоки реального Go-приложения. Каждый блок — отдельная тема с теорией, примерами, упражнениями с самопроверкой `PASS`/`FAIL` и решениями. Всё на стандартной библиотеке, без сети и внешних сервисов.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — слои приложения, handlers и статусы, repository и маппинг ошибок, config, middleware, auth, кеш, observability, ловушки.
+
 ## Пререквизиты
 
 [1_go_basics](../../1_go_basics/), интерфейсы из [2_oop](../../2_oop/), `context` и `sync` из [3_concurrency](../../3_concurrency/), `net/http` из [4_standard_library](../../4_standard_library/).

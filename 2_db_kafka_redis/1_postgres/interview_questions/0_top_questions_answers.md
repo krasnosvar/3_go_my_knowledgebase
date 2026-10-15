@@ -288,10 +288,10 @@ SELECT * FROM products WHERE id = 1 FOR UPDATE;
 UPDATE products SET stock = stock - 1 WHERE id = 1;
 COMMIT;
 
--- Блокировка с ожиданием (по умолчанию)
+-- Без ожидания: если строка уже заблокирована — сразу ошибка
 SELECT * FROM products FOR UPDATE NOWAIT;
 
--- Блокировка с таймаутом
+-- Пропустить уже заблокированные строки (очереди задач)
 SELECT * FROM products FOR UPDATE SKIP LOCKED;
 ```
 

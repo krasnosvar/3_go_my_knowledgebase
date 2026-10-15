@@ -38,7 +38,7 @@ var (
 )
 
 fmt.Println(b, n, s, p, sl, m, ch, fn, any)
-// false 0 "" <nil> [] map[] <nil> <nil> <nil>
+// false 0  <nil> [] map[] <nil> <nil> <nil>   (пустая строка не видна)
 ```
 
 ## Важные нюансы

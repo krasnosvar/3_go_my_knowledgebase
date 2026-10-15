@@ -165,16 +165,17 @@ Topic: "orders"
     ДА                       НЕТ
     │                         │
     ▼                         ▼
-hash(key) % num_partitions  Round-robin
+hash(key) % num_partitions  Sticky partitioner
     │                         │
     ▼                         ▼
-Одна и та же партиция     Случайная партиция
-для одного key            каждый раз
+Одна и та же партиция     Одна партиция на батч,
+для одного key            следующий батч — другая
 
 Пример:
 • Сообщение с key="user123" → всегда Partition 1
 • Сообщение с key="user456" → всегда Partition 2
-• Сообщение без key → Partition 0, 1, 2, 0, 1...
+• Сообщения без key → батч в Partition 0, следующий батч в Partition 2, ...
+  (sticky partitioner — Java-клиент 2.4+; до этого был round-robin по сообщениям)
 ```
 
 ### Offset (Смещение)
@@ -246,7 +247,7 @@ Consumer помнит свой offset:
        │
        ▼
 ┌──────────────────────┐
-│  Partitioner         │  3. Выбор партиции (по key или round-robin)
+│  Partitioner         │  3. Выбор партиции (по key или sticky)
 └──────┬───────────────┘
        │
        ▼
@@ -357,6 +358,8 @@ config.Producer.Flush.MaxMessages = 1000                  // Макс. разм�
 │ ✅ Максимальная надежность                         │
 │ ❌ Медленнее                                       │
 └────────────────────────────────────────────────────┘
+
+С Kafka 3.0 по умолчанию у producer acks=all и enable.idempotence=true.
 
 Визуализация acks=all:
 Producer                Leader      Replica 1   Replica 2

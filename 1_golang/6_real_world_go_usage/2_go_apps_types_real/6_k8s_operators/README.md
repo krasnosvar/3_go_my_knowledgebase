@@ -2,6 +2,8 @@
 
 Логика оператора на простых структурах вместо client-go: идемпотентный reconcile, conditions, finalizers, валидация spec, события, requeue, ownerReferences, метрики.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#6-k8s-operators) — раздел «6. K8s operators» общей шпаргалки типов Go-приложений.
+
 ## Пререквизиты
 
 [5_workers_cron](../5_workers_cron/); базовое знакомство с Kubernetes.

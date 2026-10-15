@@ -26,7 +26,8 @@ name, age := "den", 30
 ```go
 a, err := foo()   // объявили обе
 a, err = bar()    // обе уже есть — обычный assign
-a, err := baz()   // ок: есть хотя бы одно новое (err пересоздаётся только в новом блоке)
+a, b, err := baz() // ок: b новая, a и err просто переприсваиваются
+// a, err := qux() // ошибка компиляции: no new variables on left side of :=
 ```
 
 ## var vs :=

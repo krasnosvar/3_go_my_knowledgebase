@@ -6,6 +6,8 @@
 
 **Пререквизиты:** [04_sync_package](../04_sync_package/) (сравнение с `Mutex`).
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — типы и методы, стоимость операций, atomic или mutex, CAS-loop, happens-before, ловушки.
+
 ## 🗂 Структура раздела
 
 *   **[01_theory/](./01_theory/)** — теория:

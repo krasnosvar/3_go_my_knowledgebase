@@ -3,6 +3,8 @@
 Как Go устроен внутри: runtime и планировщик, память и сборщик мусора,
 установка и модули, профилирование, reflection и `unsafe`.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — GMP и вытеснение, GOMAXPROCS по версиям, escape analysis и GC, `GOGC`/`GOMEMLIMIT`, `go mod`, pprof, `GODEBUG`, reflect и `unsafe`.
+
 ## Зачем
 
 Без этих знаний можно писать на Go, но нельзя объяснить, почему сервис

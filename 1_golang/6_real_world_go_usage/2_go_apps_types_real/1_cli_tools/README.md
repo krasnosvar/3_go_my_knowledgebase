@@ -2,6 +2,8 @@
 
 CLI на Go: свой `flag.FlagSet`, подкоманды, fallback на окружение, коды выхода, stdout/stderr, dry-run и help. Логика выносится в `run(...)`, чтобы её можно было тестировать.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](../CHEATSHEET.md#1-cli-tools) — раздел «1. CLI tools» общей шпаргалки типов Go-приложений.
+
 ## Пререквизиты
 
 [1_app_parts/4_config_and_env](../../1_app_parts/4_config_and_env/), `io`/`os` из [4_standard_library](../../../4_standard_library/).

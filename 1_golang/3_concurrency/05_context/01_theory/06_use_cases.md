@@ -81,7 +81,13 @@ ctx, cancel := signal.NotifyContext(context.Background(),
     syscall.SIGINT, syscall.SIGTERM)
 defer cancel()
 
-server.ListenAndServeCtx(ctx)
+srv := &http.Server{Addr: ":8080"}
+go func() { _ = srv.ListenAndServe() }()
+
+<-ctx.Done() // пришёл SIGINT/SIGTERM
+shutdownCtx, cancel2 := context.WithTimeout(context.Background(), 10*time.Second)
+defer cancel2()
+_ = srv.Shutdown(shutdownCtx) // у http.Server нет метода, принимающего ctx на старте
 ```
 
 Удобный идиом c Go 1.16+: SIGINT/SIGTERM сразу превращается в отмену контекста.
