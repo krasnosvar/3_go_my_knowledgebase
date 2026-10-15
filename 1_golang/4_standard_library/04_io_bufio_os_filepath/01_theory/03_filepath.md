@@ -75,7 +75,7 @@ func listTxt(fsys fs.FS) []string {
 }
 ```
 
-В продe `os.DirFS("/data")`, в тестах `fstest.MapFS{...}`.
+В проде `os.DirFS("/data")`, в тестах `fstest.MapFS{...}`.
 
 ## Частые ошибки
 

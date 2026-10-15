@@ -87,3 +87,7 @@ float64:      8 bytes
 complex64:    8 bytes
 complex128:  16 bytes
 ```
+
+## См. также
+
+- [Как компьютер хранит числа](../../../../other/03_number_representation.md) — двоичное представление, дополнительный код, IEEE 754, переполнение.

@@ -14,24 +14,33 @@ func firstByte(s string) byte {
 func main() {
 	fmt.Println("--- Проверка 03_string_bytes ---")
 
-	tests := []struct {
-		input string
-		want  byte
-	}{
-		{"Go", 'G'},
-		{"", 0},
-		{"Hello", 'H'},
+	allPassed := true
+
+	// Тест 1
+	got := firstByte("Go")
+	if got == byte('G') {
+		fmt.Printf("Тест 1 (%q): PASS\n", "Go")
+	} else {
+		fmt.Printf("Тест 1 (%q): FAIL (ожидалось %d, получено %d)\n", "Go", byte('G'), got)
+		allPassed = false
 	}
 
-	allPassed := true
-	for i, tt := range tests {
-		got := firstByte(tt.input)
-		if got == tt.want {
-			fmt.Printf("Тест %d (%q): PASS\n", i+1, tt.input)
-		} else {
-			fmt.Printf("Тест %d (%q): FAIL (ожидалось %d, получено %d)\n", i+1, tt.input, tt.want, got)
-			allPassed = false
-		}
+	// Тест 2
+	got = firstByte("")
+	if got == byte(0) {
+		fmt.Printf("Тест 2 (%q): PASS\n", "")
+	} else {
+		fmt.Printf("Тест 2 (%q): FAIL (ожидалось %d, получено %d)\n", "", byte(0), got)
+		allPassed = false
+	}
+
+	// Тест 3
+	got = firstByte("Hello")
+	if got == byte('H') {
+		fmt.Printf("Тест 3 (%q): PASS\n", "Hello")
+	} else {
+		fmt.Printf("Тест 3 (%q): FAIL (ожидалось %d, получено %d)\n", "Hello", byte('H'), got)
+		allPassed = false
 	}
 
 	if allPassed {

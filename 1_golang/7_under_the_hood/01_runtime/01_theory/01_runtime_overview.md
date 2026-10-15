@@ -14,7 +14,7 @@ Go runtime — это среда выполнения, встроенная в �
 
 - **Scheduler** — модель GMP (см. соседний файл).
 - **Memory allocator** — TCMalloc-подобный, разделён на классы размера, lock-free per-P.
-- **GC** — concurrent triколор. С Go 1.5 паузы STW обычно < 1 ms.
+- **GC** — concurrent tri-color (трёхцветный) mark-and-sweep. В Go 1.5 GC стал конкурентным с целью пауз STW < 10 ms; субмиллисекундные паузы появились примерно с Go 1.8 (устранение повторного сканирования стеков).
 - **Network poller** — `epoll`/`kqueue`/`IOCP` под капотом, скрытый за `net.Conn`.
 - **Stack management** — каждая горутина имеет свой стек, растёт динамически.
 

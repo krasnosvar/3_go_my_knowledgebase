@@ -2,6 +2,15 @@
 
 Этот раздел посвящен изучению функций в Go, замыканий (closures), отложенных вызовов `defer`, обработки паник `panic/recover` и дженериков (обобщенного программирования).
 
+## 📋 Пререквизиты
+
+*   Пройдена предыдущая тема: [06_pointers](../06_pointers/).
+
+> ⏩ **Забегание вперёд.** Некоторые примеры и упражнения используют конструкции из следующих тем:
+> *   `08_generic_min` и теория [05_generics.md](./01_theory/05_generics.md) — дженерики; ограничения (constraints) — это интерфейсы, поэтому полная тема — в [2_oop/05_generics](../../2_oop/05_generics/) после [2_oop/02_interfaces](../../2_oop/02_interfaces/).
+> *   `07_error_wrapper` использует `error`, `panic`/`recover` — подробно в [12_errors](../12_errors/).
+> *   Пример `02_system_infrastructure` запускает горутину — подробно в [3_concurrency/01_goroutines](../../3_concurrency/01_goroutines/).
+
 ## 🗂 Структура раздела
 
 *   **[01_theory/](./01_theory/)** — теория:
@@ -39,3 +48,7 @@
    go run ./03_exercises/05_closure_counter/main.go
    ```
 4. Сверьтесь с эталонными ответами в `04_exercises_answers/`.
+
+## ➡️ Что дальше
+
+Когда все упражнения темы печатают `PASS`, переходите к теме [08_structs](../08_structs/).

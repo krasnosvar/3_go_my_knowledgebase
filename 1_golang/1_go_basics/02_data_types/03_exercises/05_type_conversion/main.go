@@ -15,27 +15,34 @@ func avg(a int, b int) float64 {
 func main() {
 	fmt.Println("--- Проверка 05_type_conversion ---")
 
-	tests := []struct {
-		a    int
-		b    int
-		want float64
-	}{
-		{3, 4, 3.5},
-		{10, 20, 15.0},
-		{0, 0, 0.0},
+	// Для сравнения float используем epsilon-разницу (math.Abs)
+	allPassed := true
+
+	// Тест 1
+	got := avg(3, 4)
+	if math.Abs(got-3.5) < 1e-9 {
+		fmt.Printf("Тест 1 (avg от %d и %d): PASS\n", 3, 4)
+	} else {
+		fmt.Printf("Тест 1 (avg от %d и %d): FAIL (ожидалось %.2f, получено %.2f)\n", 3, 4, 3.5, got)
+		allPassed = false
 	}
 
-	allPassed := true
-	for i, tt := range tests {
-		got := avg(tt.a, tt.b)
-		// Для сравнения float используем epsilon-разницу
-		if math.Abs(got-tt.want) < 1e-9 {
-			fmt.Printf("Тест %d (avg от %d и %d): PASS\n", i+1, tt.a, tt.b)
-		} else {
-			fmt.Printf("Тест %d (avg от %d и %d): FAIL (ожидалось %.2f, получено %.2f)\n",
-				i+1, tt.a, tt.b, tt.want, got)
-			allPassed = false
-		}
+	// Тест 2
+	got = avg(10, 20)
+	if math.Abs(got-15.0) < 1e-9 {
+		fmt.Printf("Тест 2 (avg от %d и %d): PASS\n", 10, 20)
+	} else {
+		fmt.Printf("Тест 2 (avg от %d и %d): FAIL (ожидалось %.2f, получено %.2f)\n", 10, 20, 15.0, got)
+		allPassed = false
+	}
+
+	// Тест 3
+	got = avg(0, 0)
+	if math.Abs(got-0.0) < 1e-9 {
+		fmt.Printf("Тест 3 (avg от %d и %d): PASS\n", 0, 0)
+	} else {
+		fmt.Printf("Тест 3 (avg от %d и %d): FAIL (ожидалось %.2f, получено %.2f)\n", 0, 0, 0.0, got)
+		allPassed = false
 	}
 
 	if allPassed {

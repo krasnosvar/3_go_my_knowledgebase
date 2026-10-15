@@ -57,7 +57,7 @@ Consumer медленнее producer'а → лаг растёт.
 
 При добавлении/удалении consumer'а в группе Kafka перераспределяет partition'ы. На время rebalance обработка стопается.
 
-Hookи `OnRebalance` позволяют корректно зафиксировать offset и почистить state.
+Хуки `OnRebalance` позволяют корректно зафиксировать offset и почистить state.
 
 ## Poison messages
 

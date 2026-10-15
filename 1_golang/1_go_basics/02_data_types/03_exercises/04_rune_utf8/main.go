@@ -15,25 +15,33 @@ func firstRune(s string) rune {
 func main() {
 	fmt.Println("--- Проверка 04_rune_utf8 ---")
 
-	tests := []struct {
-		input string
-		want  rune
-	}{
-		{"Go", 'G'},
-		{"Привет", 'П'}, // 'П' - это руна 1055, но в байтах s[0] == 208
-		{"", 0},
+	allPassed := true
+
+	// Тест 1
+	got := firstRune("Go")
+	if got == 'G' {
+		fmt.Printf("Тест 1 (%q): PASS\n", "Go")
+	} else {
+		fmt.Printf("Тест 1 (%q): FAIL (ожидалось %c, получено %c)\n", "Go", 'G', got)
+		allPassed = false
 	}
 
-	allPassed := true
-	for i, tt := range tests {
-		got := firstRune(tt.input)
-		if got == tt.want {
-			fmt.Printf("Тест %d (%q): PASS\n", i+1, tt.input)
-		} else {
-			fmt.Printf("Тест %d (%q): FAIL (ожидалась руна %d (%c), получена %d (%c))\n",
-				i+1, tt.input, tt.want, tt.want, got, got)
-			allPassed = false
-		}
+	// Тест 2: 'П' - это руна 1055, но в байтах s[0] == 208
+	got = firstRune("Привет")
+	if got == 'П' {
+		fmt.Printf("Тест 2 (%q): PASS\n", "Привет")
+	} else {
+		fmt.Printf("Тест 2 (%q): FAIL (ожидалось %c, получено %c)\n", "Привет", 'П', got)
+		allPassed = false
+	}
+
+	// Тест 3
+	got = firstRune("")
+	if got == rune(0) {
+		fmt.Printf("Тест 3 (%q): PASS\n", "")
+	} else {
+		fmt.Printf("Тест 3 (%q): FAIL (ожидалось %c, получено %c)\n", "", rune(0), got)
+		allPassed = false
 	}
 
 	if allPassed {

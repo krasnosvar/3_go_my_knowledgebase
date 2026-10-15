@@ -1,3 +1,6 @@
+// ⏩ Забегание вперёд: пакет unsafe разбирается в 7_under_the_hood/05_reflection_unsafe.
+// Эту задачу можно отложить; в обычном коде используйте string(b) и []byte(s).
+
 package main
 
 import (

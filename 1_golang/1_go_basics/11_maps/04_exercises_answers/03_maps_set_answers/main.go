@@ -1,57 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-/*
-	ОТВЕТЫ К ЗАДАНИЮ 3
-*/
-
-// ================= РЕШЕНИЕ: Set =================
 type Set struct {
-	items map[string]struct{}
+	data map[string]struct{}
 }
 
 func NewSet() *Set {
-	return &Set{
-		items: make(map[string]struct{}),
-	}
+	return &Set{data: make(map[string]struct{})}
 }
 
 func (s *Set) Add(item string) {
-	s.items[item] = struct{}{}
-}
-
-func (s *Set) Remove(item string) {
-	delete(s.items, item)
+	s.data[item] = struct{}{}
 }
 
 func (s *Set) Contains(item string) bool {
-	_, exists := s.items[item]
-	return exists
+	_, ok := s.data[item]
+	return ok
 }
-
-func (s *Set) Intersection(other *Set) *Set {
-	result := NewSet()
-	for item := range s.items {
-		if other.Contains(item) {
-			result.Add(item)
-		}
-	}
-	return result
-}
-
-// ===============================================
 
 func main() {
-	s1 := NewSet()
-	s1.Add("apple")
-	s1.Add("banana")
+	fmt.Println("--- Проверка 03_maps_set (Решение) ---")
 
-	s2 := NewSet()
-	s2.Add("banana")
-	s2.Add("orange")
+	s := NewSet()
+	s.Add("go")
+	s.Add("rust")
+	s.Add("go")
 
-	intersect := s1.Intersection(s2)
-	fmt.Println("Contains banana:", intersect.Contains("banana")) // true
-	fmt.Println("Contains apple:", intersect.Contains("apple"))   // false
+	t1 := s.Contains("go")
+	t2 := s.Contains("rust")
+	t3 := !s.Contains("c++")
+
+	if t1 && t2 && t3 {
+		fmt.Println("Тест Set: PASS")
+	} else {
+		fmt.Printf("Тест Set: FAIL (contains 'go': %t, contains 'rust': %t)\n", t1, t2)
+	}
 }

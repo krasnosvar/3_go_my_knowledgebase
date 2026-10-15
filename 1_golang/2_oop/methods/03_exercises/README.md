@@ -1,3 +1,0 @@
-# Упражнения: methods
-
-Запуск: `go run ./03_exercises/01_value_receiver` ...

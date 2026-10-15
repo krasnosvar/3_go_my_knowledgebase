@@ -82,5 +82,5 @@ func worker(ctx context.Context, jobs <-chan Job) {
 
 ## Readiness/liveness
 
-- В момент shutdown правильно **сразу** отвечать 503 на readiness — чтобы орk's перестал слать трафик.
+- В момент shutdown правильно **сразу** отвечать 503 на readiness — чтобы оркестратор (Kubernetes) перестал слать трафик.
 - Liveness при этом остаётся ок — мы жив, но «собираемся».

@@ -1,3 +1,5 @@
+// ⏩ Забегание вперёд: горутины, sync.RWMutex и sync.WaitGroup разбираются в 3_concurrency.
+
 package main
 
 import (

@@ -1,51 +1,51 @@
-# Docker Compose: ClickHouse Server + Tabix
+# Docker Compose: ClickHouse Server
 
-## What is this
+## Что поднимается
 
-`docker-compose.yaml` starts:
+`docker-compose.yaml` запускает один контейнер `clickhouse` (образ `clickhouse/clickhouse-server:latest`):
 
-- **ClickHouse Server**
-  - HTTP: `localhost:8123`
-  - Native: `localhost:9000`
-- **Tabix** (web UI) on `localhost:8124`
+- HTTP-интерфейс: `localhost:8123` (в том числе встроенный веб-UI `http://localhost:8123/play`);
+- native-протокол (для Go-драйвера): `localhost:9000`;
+- пользователь `default` / пароль `admin`, база `test_db`;
+- данные — в `./clickhouse_data` (каталог в `.gitignore`).
 
-## Start / stop
+## Запуск и остановка
 
 ```bash
 docker compose up -d
 docker compose ps
 ```
 
-Stop:
+Остановка:
 
 ```bash
 docker compose down
 ```
 
-## Connect
+## Проверка
 
-Ping:
+Ping (без авторизации):
 
 ```bash
 curl -s http://localhost:8123/ping
 ```
 
-Run a query:
+Запрос через HTTP:
 
 ```bash
-curl -s "http://localhost:8123/?query=SELECT%201"
+curl -s --user default:admin "http://localhost:8123/?query=SELECT%201"
 ```
 
-ClickHouse client:
+Через `clickhouse-client` внутри контейнера:
 
 ```bash
-docker compose exec -T clickhouse clickhouse-client --query "SELECT version()"
+docker compose exec -T clickhouse clickhouse-client --password admin --query "SELECT version()"
 ```
 
 ## UI
 
-Open: `http://localhost:8124`
+Встроенный веб-интерфейс ClickHouse: `http://localhost:8123/play` (пользователь `default`, пароль `admin`).
 
-Connection:
+## Дальше
 
-- URL: `http://clickhouse:8123`
+Упражнения — [../exercises/](../exercises/README.md).

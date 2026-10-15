@@ -1,3 +1,0 @@
-# Упражнения: Linked List (Go)
-
-Запуск: `go run ./03_exercises/01_append` ...

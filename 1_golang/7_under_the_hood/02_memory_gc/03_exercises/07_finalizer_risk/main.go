@@ -1,8 +1,72 @@
+// Упражнение 07: явный Close вместо финализатора.
+//
+// runtime.SetFinalizer не гарантирует ни момент вызова, ни сам вызов
+// (программа может завершиться раньше GC). Поэтому ресурсы освобождают
+// явно: Close() + defer у вызывающего.
+//
+// Задача: реализуйте Resource.Close так, чтобы:
+//   - первый вызов освобождал ресурс (openResources уменьшается на 1) и
+//     возвращал nil;
+//   - повторные вызовы ничего не освобождали и возвращали ErrAlreadyClosed.
+//
+// Запуск: go run ./03_exercises/07_finalizer_risk/main.go
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+
+// ErrAlreadyClosed возвращается при повторном Close.
+var ErrAlreadyClosed = errors.New("resource already closed")
+
+// openResources — счётчик неосвобождённых ресурсов (как открытые файлы/сокеты).
+var openResources int
+
+type Resource struct {
+	closed bool
+}
+
+func Open() *Resource {
+	openResources++
+	return &Resource{}
+}
+
+// Close освобождает ресурс ровно один раз.
+func (r *Resource) Close() error {
+	// TODO: при повторном вызове верните ErrAlreadyClosed; иначе пометьте
+	// ресурс закрытым и уменьшите openResources.
+	return nil
+}
 
 func main() {
-	// TODO: реализуй упражнение
-	fmt.Println("todo")
+	fmt.Println("--- Проверка 07_finalizer_risk ---")
+
+	allOK := true
+	check := func(cond bool, msg string) {
+		if !cond {
+			allOK = false
+			fmt.Println("FAIL:", msg)
+		}
+	}
+
+	r1 := Open()
+	r2 := Open()
+	check(openResources == 2, fmt.Sprintf("после двух Open ожидалось 2 ресурса, получено %d", openResources))
+
+	check(r1.Close() == nil, "первый Close должен вернуть nil")
+	check(openResources == 1, fmt.Sprintf("после Close ожидался 1 ресурс, получено %d", openResources))
+	check(errors.Is(r1.Close(), ErrAlreadyClosed), "повторный Close должен вернуть ErrAlreadyClosed")
+	check(openResources == 1, "повторный Close не должен ничего освобождать")
+
+	func() {
+		defer r2.Close() // идиома: закрываем через defer сразу после Open
+	}()
+	check(openResources == 0, fmt.Sprintf("после defer r2.Close() ожидалось 0 ресурсов, получено %d", openResources))
+
+	if allOK {
+		fmt.Println("PASS")
+	} else {
+		fmt.Println("FAIL")
+	}
 }

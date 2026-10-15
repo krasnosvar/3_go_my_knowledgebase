@@ -1,17 +1,58 @@
+// Упражнение 04: однонаправленные каналы.
+//
+// Задача:
+//   - sender(out chan<- int, vals) отправляет все vals и закрывает out;
+//   - receiver(in <-chan int) читает до закрытия и возвращает срез значений.
+//
+// Типы chan<- и <-chan ограничивают, что функция может делать с каналом:
+// sender не сможет читать, receiver — отправлять или закрывать.
+//
+// Запуск: go run ./03_exercises/04_directional/main.go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-func sender(out chan<- int) {
-	// TODO: отправь значение и закрой канал.
-	_ = out
+// sender отправляет vals в out и закрывает канал.
+func sender(out chan<- int, vals []int) {
+	// TODO: отправьте значения и закройте out.
 }
 
-func receiver(in <-chan int) {
-	// TODO: прочитай и выведи значения из канала.
-	_ = in
+// receiver читает in до закрытия и возвращает значения.
+func receiver(in <-chan int) []int {
+	// TODO: прочитайте все значения через range.
+	return nil
 }
 
 func main() {
-	fmt.Println("implement directional channels")
+	fmt.Println("--- Проверка 04_directional ---")
+
+	allOK := true
+	check := func(cond bool, msg string) {
+		if !cond {
+			allOK = false
+			fmt.Println("FAIL:", msg)
+		}
+	}
+
+	ch := make(chan int)
+	go sender(ch, []int{1, 2, 3})
+
+	result := make(chan []int, 1)
+	go func() { result <- receiver(ch) }()
+
+	select {
+	case got := <-result:
+		check(fmt.Sprint(got) == "[1 2 3]", fmt.Sprintf("receiver вернул %v, ожидалось [1 2 3]", got))
+	case <-time.After(300 * time.Millisecond):
+		check(false, "receiver не завершился: sender должен закрыть канал")
+	}
+
+	if allOK {
+		fmt.Println("PASS")
+	} else {
+		fmt.Println("FAIL")
+	}
 }

@@ -11,7 +11,11 @@ func main() {
 		w.Write([]byte("pong"))
 	}))
 	defer ts.Close()
-	resp, _ := http.Get(ts.URL)
+	resp, err := http.Get(ts.URL)
+	if err != nil { // сначала проверяем ошибку: при err != nil resp == nil
+		fmt.Println("request failed:", err)
+		return
+	}
 	defer resp.Body.Close()
 	fmt.Println(resp.StatusCode)
 }

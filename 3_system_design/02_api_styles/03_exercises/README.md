@@ -11,7 +11,7 @@ go run ./03_exercises/01_method_semantics/main.go
 Запуск эталонного решения:
 
 ```bash
-go run ./04_exercises_answers/01_method_semantics/main.go
+go run ./04_exercises_answers/01_method_semantics_answers/main.go
 ```
 
 ## Список задач (от простого к сложному)

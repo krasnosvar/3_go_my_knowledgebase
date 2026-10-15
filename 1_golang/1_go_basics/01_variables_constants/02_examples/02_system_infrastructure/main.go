@@ -8,7 +8,8 @@ import (
 type ServerStatus int
 
 // Объявление статусов с помощью iota.
-// Начинаем с 1, пропуская 0 (Unknown) с помощью заглушки `_`.
+// Значение 0 зарезервировано под StatusUnknown: так нулевое значение
+// (zero value) переменной типа ServerStatus означает «статус неизвестен».
 const (
 	StatusUnknown ServerStatus = iota // 0
 	StatusActive                      // 1
@@ -16,30 +17,24 @@ const (
 	StatusOffline                     // 3
 )
 
-// Метод String позволяет красиво печатать статус
-func (s ServerStatus) String() string {
-	switch s {
-	case StatusActive:
-		return "ACTIVE"
-	case StatusPending:
-		return "PENDING"
-	case StatusOffline:
-		return "OFFLINE"
-	default:
-		return "UNKNOWN"
-	}
-}
+// Человекочитаемые имена статусов — тоже константы.
+// (Позже, в теме методов, такую печать делают через метод String() — см. ../../../../2_oop/01_methods/.)
+const (
+	NameUnknown = "UNKNOWN"
+	NameActive  = "ACTIVE"
+	NamePending = "PENDING"
+	NameOffline = "OFFLINE"
+)
 
 func main() {
-	// Создаем карту серверов и их состояний
-	servers := map[string]ServerStatus{
-		"srv-web-01": StatusActive,
-		"srv-db-01":  StatusPending,
-		"srv-test-0": StatusOffline,
-	}
+	webStatus := StatusActive
+	dbStatus := StatusPending
+	testStatus := StatusOffline
+	var newStatus ServerStatus // нулевое значение = StatusUnknown
 
 	fmt.Println("--- Статус инфраструктуры ---")
-	for name, status := range servers {
-		fmt.Printf("Сервер %s: %s (код: %d)\n", name, status, status)
-	}
+	fmt.Printf("Сервер srv-web-01: %s (код: %d)\n", NameActive, webStatus)
+	fmt.Printf("Сервер srv-db-01:  %s (код: %d)\n", NamePending, dbStatus)
+	fmt.Printf("Сервер srv-test-0: %s (код: %d)\n", NameOffline, testStatus)
+	fmt.Printf("Новый сервер:      %s (код: %d)\n", NameUnknown, newStatus)
 }

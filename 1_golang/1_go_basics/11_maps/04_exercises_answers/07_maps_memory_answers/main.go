@@ -1,34 +1,42 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func main() {
-	fmt.Println("--- Task 1: Очистка мапы ---")
-	task1_clear_map()
+func shrinkMap(m map[int]string, threshold int) map[int]string {
+	if len(m) < threshold {
+		newMap := make(map[int]string, len(m))
+		for k, v := range m {
+			newMap[k] = v
+		}
+		return newMap
+	}
+	return m
 }
 
-func task1_clear_map() {
-	// ================= РЕШЕНИЕ =================
-	m := make(map[int]int)
+func main() {
+	fmt.Println("--- Проверка 07_maps_memory (Решение) ---")
+
+	m := make(map[int]string)
 	for i := 0; i < 1000; i++ {
-		m[i] = i * 2
+		m[i] = "value"
 	}
 
-	fmt.Println("До очистки, длина:", len(m))
+	for i := 0; i < 950; i++ {
+		delete(m, i)
+	}
 
-	// Способ 1 (Плохой): цикл + delete.
-	// Оставляет пустыми "бакеты" внутри мапы, память не отдается ОС!
-	// for k := range m {
-	// 	delete(m, k)
-	// }
+	shrunk := shrinkMap(m, 100)
 
-	// Способ 2 (Стандартный до Go 1.21): просто создать новую мапу
-	// Старая мапа соберется Garbage Collector-ом.
-	// m = make(map[int]int)
+	t1 := len(shrunk) == 50
 
-	// Способ 3 (Лучший для Go 1.21+): встроенная функция clear
-	clear(m)
+	shrunk[9999] = "new"
+	_, foundOld := m[9999]
 
-	fmt.Println("После очистки (clear), длина:", len(m))
-	// ===========================================
+	if t1 && !foundOld {
+		fmt.Println("Тест shrinkMap: PASS")
+	} else {
+		fmt.Printf("Тест shrinkMap: FAIL (len=%d, foundOld=%t)\n", len(shrunk), foundOld)
+	}
 }

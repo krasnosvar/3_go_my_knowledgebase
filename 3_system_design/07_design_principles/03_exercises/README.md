@@ -11,7 +11,7 @@ go run ./03_exercises/01_srp_refactor/main.go
 Запуск эталонного решения:
 
 ```bash
-go run ./04_exercises_answers/01_srp_refactor/main.go
+go run ./04_exercises_answers/01_srp_refactor_answers/main.go
 ```
 
 ## Список задач (от простого к сложному)

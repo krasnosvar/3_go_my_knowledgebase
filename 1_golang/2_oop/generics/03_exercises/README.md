@@ -1,3 +1,0 @@
-# Упражнения: generics
-
-Запуск: `go run ./03_exercises/01_generic_func` ...

@@ -2,36 +2,32 @@ package main
 
 import (
 	"fmt"
-	"reflect"
 )
 
 // TODO: Объявите нетипизированную константу `Pi` со значением 3.14
 // TODO: Объявите типизированную константу `MaxCount` типа int32 со значением 100
-
-var _ = reflect.TypeOf
+//
+// ВНИМАНИЕ: ниже стоят заглушки, чтобы программа компилировалась.
+// Замените их своими объявлениями.
+const Pi = 0
+const MaxCount int = 0
 
 func main() {
 	fmt.Println("--- Проверка 03_const ---")
 
-	// ВНИМАНИЕ: Для прохождения проверки объявите константы выше функции main, а здесь мы проверим их значения
-	// (Если компилятор ругается на undefined, значит константы не объявлены)
+	// %T печатает тип значения (подробнее о fmt — в теме 03_fmt_and_output)
+	fmt.Printf("Pi: %v (тип: %T)\n", Pi, Pi)
+	fmt.Printf("MaxCount: %v (тип: %T)\n", MaxCount, MaxCount)
 
-	/*
-		fmt.Printf("Pi: %v (тип: %s)\n", Pi, reflect.TypeOf(Pi))
-		fmt.Printf("MaxCount: %v (тип: %s)\n", MaxCount, reflect.TypeOf(MaxCount))
+	if Pi == 3.14 {
+		fmt.Println("Тест Pi: PASS")
+	} else {
+		fmt.Println("Тест Pi: FAIL")
+	}
 
-		if Pi == 3.14 {
-			fmt.Println("Тест Pi: PASS")
-		} else {
-			fmt.Println("Тест Pi: FAIL")
-		}
-
-		if MaxCount == 100 && reflect.TypeOf(MaxCount).String() == "int32" {
-			fmt.Println("Тест MaxCount: PASS")
-		} else {
-			fmt.Println("Тест MaxCount: FAIL")
-		}
-	*/
-
-	fmt.Println("Раскомментируйте блок кода в main для запуска тестов")
+	if MaxCount == 100 && fmt.Sprintf("%T", MaxCount) == "int32" {
+		fmt.Println("Тест MaxCount: PASS")
+	} else {
+		fmt.Println("Тест MaxCount: FAIL")
+	}
 }

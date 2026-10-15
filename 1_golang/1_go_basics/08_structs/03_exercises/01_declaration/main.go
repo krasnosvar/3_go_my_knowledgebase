@@ -5,22 +5,26 @@ import (
 )
 
 // TODO: Объявите структуру Movie с тремя экспортируемыми полями:
-// Title (string), Year (int), Rating (float64)
+// Title (string), Year (int), Rating (float64).
+// ВНИМАНИЕ: ниже заглушка (пустая структура), чтобы программа компилировалась — замените её.
+type Movie struct{}
+
+// newInception создаёт фильм «Inception».
+// TODO: после объявления полей верните Movie{Title: "Inception", Year: 2010, Rating: 8.8}.
+func newInception() Movie {
+	return Movie{}
+}
 
 func main() {
 	fmt.Println("--- Проверка 01_declaration ---")
 
-	// ВНИМАНИЕ: Раскомментируйте код ниже после объявления структуры Movie.
+	m := newInception()
 
-	/*
-		m := Movie{Title: "Inception", Year: 2010, Rating: 8.8}
-
-		if m.Title == "Inception" && m.Year == 2010 && m.Rating == 8.8 {
-			fmt.Println("Тест Movie: PASS")
-		} else {
-			fmt.Printf("Тест Movie: FAIL (получено %+v)\n", m)
-		}
-	*/
-
-	fmt.Println("Раскомментируйте проверку в main")
+	// %+v печатает структуру вместе с именами полей.
+	got := fmt.Sprintf("%+v", m)
+	if got == "{Title:Inception Year:2010 Rating:8.8}" {
+		fmt.Println("Тест Movie: PASS")
+	} else {
+		fmt.Printf("Тест Movie: FAIL (получено %s)\n", got)
+	}
 }

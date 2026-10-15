@@ -94,7 +94,7 @@ func square(ctx context.Context, in <-chan int) <-chan int {
 ## Когда pipeline
 
 - ETL-обработка.
-- Streaming / media-проcessing.
+- Streaming / media-processing.
 - Любая «преобразовательная» последовательность шагов.
 
 ## Когда НЕ pipeline

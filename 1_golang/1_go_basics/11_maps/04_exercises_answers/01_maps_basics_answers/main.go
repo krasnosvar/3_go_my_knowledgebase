@@ -1,39 +1,34 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-/*
-	ОТВЕТЫ К ЗАДАНИЮ 1: Основы работы с мапами
-*/
+func getAge(db map[string]int, name string) (int, bool) {
+	age, ok := db[name]
+	if !ok {
+		return -1, false
+	}
+	return age, true
+}
 
 func main() {
-	fmt.Println("--- Task 1: CRUD ---")
-	task1_crud()
+	fmt.Println("--- Проверка 01_maps_basics (Решение) ---")
 
-	fmt.Println("\n--- Task 2: Проверка наличия ключа ---")
-	task2_check_key()
-}
-
-func task1_crud() {
-	// ================= РЕШЕНИЕ: Task 1 =================
-	m := make(map[string]int) // Шаг 1
-	m["a"] = 10               // Шаг 2
-	m["a"] = 20               // Шаг 3
-	m["b"] = 30               // Шаг 4
-	delete(m, "a")            // Шаг 5
-
-	fmt.Println(m)
-	// ====================================================
-}
-
-func task2_check_key() {
-	// ================= РЕШЕНИЕ: Task 2 =================
-	m := map[string]int{"a": 1}
-
-	if v, ok := m["b"]; ok {
-		fmt.Println("Значение:", v)
-	} else {
-		fmt.Println("Ключ не найден")
+	db := map[string]int{
+		"Alice": 25,
+		"Bob":   30,
 	}
-	// ====================================================
+
+	age1, ok1 := getAge(db, "Alice")
+	age2, ok2 := getAge(db, "Charlie")
+
+	t1 := ok1 && age1 == 25
+	t2 := !ok2 && age2 == -1
+
+	if t1 && t2 {
+		fmt.Println("Тест getAge: PASS")
+	} else {
+		fmt.Printf("Тест getAge: FAIL (age1=%d, ok1=%t, age2=%d, ok2=%t)\n", age1, ok1, age2, ok2)
+	}
 }

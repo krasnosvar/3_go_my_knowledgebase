@@ -1,14 +1,82 @@
+// Упражнение 02: fan-out: N выходных каналов из одного входа (Решение).
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
+
+func fanOut(in <-chan int, n int, f func(int) int) []<-chan int {
+	outs := make([]<-chan int, n)
+	for i := 0; i < n; i++ {
+		out := make(chan int)
+		outs[i] = out
+		go func() {
+			defer close(out)
+			for v := range in {
+				out <- f(v)
+			}
+		}()
+	}
+	return outs
+}
+
+// --- вспомогательные функции проверки (не меняйте) ---
+
+// collect читает канал до закрытия; ok=false, если не закрылся за d.
+func collect(ch <-chan int, d time.Duration) ([]int, bool) {
+	res := []int{}
+	deadline := time.After(d)
+	for {
+		select {
+		case v, open := <-ch:
+			if !open {
+				return res, true
+			}
+			res = append(res, v)
+		case <-deadline:
+			return res, false
+		}
+	}
+}
 
 func main() {
-	jobs := make(chan int, 3)
-	jobs <- 1
-	jobs <- 2
-	jobs <- 3
-	close(jobs)
-	for j := range jobs {
-		fmt.Println(j)
+	fmt.Println("--- Проверка 02_fan_out (Решение) ---")
+
+	allOK := true
+	check := func(cond bool, msg string) {
+		if !cond {
+			allOK = false
+			fmt.Println("FAIL:", msg)
+		}
+	}
+
+	in := make(chan int, 10)
+	for i := 1; i <= 10; i++ {
+		in <- i
+	}
+	close(in)
+
+	outs := fanOut(in, 3, func(x int) int { return x * 2 })
+	check(len(outs) == 3, fmt.Sprintf("получено %d выходных каналов, ожидалось 3", len(outs)))
+
+	sum, results := 0, make(chan []int, len(outs))
+	for _, o := range outs {
+		go func(o <-chan int) {
+			vals, _ := collect(o, 300*time.Millisecond)
+			results <- vals
+		}(o)
+	}
+	for range outs {
+		for _, v := range <-results {
+			sum += v
+		}
+	}
+	check(sum == 110, fmt.Sprintf("сумма по всем выходам = %d, ожидалось 110", sum))
+
+	if allOK {
+		fmt.Println("PASS")
+	} else {
+		fmt.Println("FAIL")
 	}
 }

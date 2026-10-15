@@ -1,49 +1,39 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-/*
-	ОТВЕТЫ К ЗАДАНИЮ 5
-*/
+type Point struct {
+	X int
+	Y int
+}
+
+func findPointName(db map[Point]string, pt Point) (string, bool) {
+	name, ok := db[pt]
+	if !ok {
+		return "unknown", false
+	}
+	return name, true
+}
 
 func main() {
-	fmt.Println("--- Task 1: Структура как ключ ---")
-	task1_struct_key()
+	fmt.Println("--- Проверка 05_maps_key_constraints (Решение) ---")
 
-	fmt.Println("\n--- Task 2: Интерфейс как ключ ---")
-	task2_interface_key()
-}
-
-func task1_struct_key() {
-	// ================= РЕШЕНИЕ: Task 1 =================
-	type Point struct {
-		X int
-		Y int
+	db := map[Point]string{
+		{X: 10, Y: 20}: "Start",
+		{X: 30, Y: 40}: "Finish",
 	}
 
-	pointsColors := make(map[Point]string)
+	name1, ok1 := findPointName(db, Point{X: 10, Y: 20})
+	name2, ok2 := findPointName(db, Point{X: 99, Y: 99})
 
-	// Структуры сравниваются по значению полей, поэтому их можно использовать как ключи
-	p1 := Point{0, 0}
-	pointsColors[p1] = "Red"
+	t1 := ok1 && name1 == "Start"
+	t2 := !ok2 && name2 == "unknown"
 
-	// При запросе по той же координате мы получим "Red"
-	fmt.Println("Цвет (0,0):", pointsColors[Point{0, 0}])
-	// ====================================================
-}
-
-func task2_interface_key() {
-	// ================= РЕШЕНИЕ: Task 2 =================
-	m := make(map[any]string)
-
-	// Это работает
-	m[1] = "A"
-	m["string_key"] = "C"
-
-	// Это вызовет panic: panic: runtime error: hash of unhashable type []int
-	// sl := []int{1, 2, 3}
-	// m[sl] = "B"
-
-	fmt.Println("Map with any keys:", m)
-	// ====================================================
+	if t1 && t2 {
+		fmt.Println("Тест Point keys: PASS")
+	} else {
+		fmt.Printf("Тест Point keys: FAIL (name1=%q, ok1=%t, name2=%q)\n", name1, ok1, name2)
+	}
 }

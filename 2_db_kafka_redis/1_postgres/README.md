@@ -1,50 +1,40 @@
-# Базы данных (PostgreSQL): учебный стенд + материалы
+# PostgreSQL: учебный стенд + материалы
 
-Этот каталог — учебный набор по SQL/PostgreSQL:
-- **теория** (понятно “как студенту”)
-- **практика на Docker Compose** (упражнения от простого к сложному)
-- **исходные вопросы/ответы** (в `interview_questions/`)
+## Зачем
+
+Реляционная БД, с которой работает большинство Go-бэкендов: SQL, транзакции и уровни изоляции, индексы и `EXPLAIN`, репликация и пулинг соединений. Здесь — теория, учебный стенд на Docker Compose, практика на SQL и Go и вопросы для самопроверки.
+
+## Пререквизиты
+
+- Docker (с `docker compose`).
+- Для Go-заданий — Go 1.22+ и пройденные [1_go_basics](../../1_golang/1_go_basics/) и [3_concurrency](../../1_golang/3_concurrency/).
 
 ## Структура
 
-- `docker_compose/`
-  - `docker-compose.yaml` — поднимает primary/replica + PgBouncer + pgAdmin
-  - `README.md` — как подключаться, команды, статусы, PgBouncer admin
-- `exercises/`
-  - пошаговые **упражнения** от простого к сложному на твоём стенде:
-    - `1_task_db/` — базовый CRUD-сервис на Go (в т.ч. вариант на GORM v2)
-    - `2_script_renew_task/` — конкурентное обновление строк, worker pool, генерация 1M пользователей
-    - `3_indeces_tasks/` — индексы и оптимизация запросов (`setup.sql`, `practice.sql`)
-    - `4_join_tasks/` — задачи на JOIN с решениями (`solutions/`)
-- `interview_questions/`
-  - исходные материалы (вопросы/ответы/задачи), на которых основаны упражнения
-- `postgres_sql_theory.md`
-  - конспект **теории**: SQL, ACID, изоляции, MVCC, блокировки, индексы, EXPLAIN, репликация, PgBouncer, CAP
+- [postgres_sql_theory.md](./postgres_sql_theory.md) — **каноничный конспект теории**: часть 1 — справочник по SQL-командам (DDL, DML, SELECT, JOIN, агрегаты, подзапросы, индексы, транзакции, представления, psql); часть 2 — концепции простым языком (нормальные формы, ACID и уровни изоляции, индексы и селективность, внешние ключи, денормализация, репликация/шардирование/партиционирование, массовые обновления, пагинация).
+- [docker_compose/](./docker_compose/README.md) — стенд primary/replica + PgBouncer + pgAdmin: как подключаться, проверять репликацию и PgBouncer.
+- [exercises/](./exercises/README.md) — практика:
+  - [4_join_tasks/](./exercises/4_join_tasks/README.md) — задачи на JOIN с решениями;
+  - [3_indexes_tasks/](./exercises/3_indexes_tasks/README.md) — индексы и оптимизация запросов;
+  - [2_script_renew_task/](./exercises/2_script_renew_task/README.md) — массовое обновление 1 млн строк из Go;
+  - [1_task_db/](./exercises/1_task_db/README.md) — большое итоговое задание: CRUD-сервис на Go (SQL и GORM v2).
+- [interview_questions/](./interview_questions/README.md) — вопросы и разборы ответов.
 
 ## Как учиться (рекомендуемый порядок)
 
-1) Подними стенд:
+1. Прочитайте теорию: [postgres_sql_theory.md](./postgres_sql_theory.md) — сначала часть 1 (синтаксис), затем часть 2 (концепции).
+2. Поднимите стенд:
 
-```bash
-cd docker_compose
-docker compose up -d
-docker compose ps
-```
+   ```bash
+   cd docker_compose
+   docker compose up -d
+   docker compose ps
+   ```
 
-2) Пройди практику:
-- открой `exercises/` и делай упражнения по порядку (`1_task_db` → `2_script_renew_task` → `3_indeces_tasks` → `4_join_tasks`)
-- в каждой подпапке есть команды, SQL и ожидаемые наблюдения
+3. Пройдите практику от простого к сложному: `4_join_tasks` → `3_indexes_tasks` → `2_script_renew_task` → `1_task_db`. Задание `1_task_db` самое объёмное (схема, API, генерация данных, аналитика, пагинация) — несмотря на номер, делайте его последним.
+4. После каждой практической темы перечитайте соответствующий раздел теории и попробуйте объяснить его своими словами.
+5. В конце ответьте на вопросы из [interview_questions/](./interview_questions/README.md) без подсказок.
 
-3) После каждой практической темы:
-- прочитай соответствующий раздел в `postgres_sql_theory.md`
-- вернись и попробуй объяснить это своими словами
+## Когда дальше
 
-4) В конце:
-- пробегись по `interview_questions/` и попробуй отвечать без подсказок
-
-## Быстрые ссылки
-
-- Практика: `exercises/`
-- Теория: `postgres_sql_theory.md`
-- Как подключаться/проверять PgBouncer/репликацию: `docker_compose/README.md`
-- Вопросы/ответы: `interview_questions/`
+Брокеры сообщений и кэш — [../2_kafka_rabbit_nats_redis/](../2_kafka_rabbit_nats_redis/README.md).

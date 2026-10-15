@@ -1,3 +1,6 @@
+// ⏩ Забегание вперёд: unsafe.Sizeof/Alignof — из пакета unsafe (7_under_the_hood/05_reflection_unsafe);
+// здесь он используется только для измерения размера структур.
+
 package main
 
 import (

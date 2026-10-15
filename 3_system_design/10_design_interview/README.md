@@ -25,7 +25,7 @@
 1. Изучите методологию: начните с [01_approach.md](./01_theory/01_approach.md), затем [02_estimations.md](./01_theory/02_estimations.md) (научитесь считать) и [03_building_blocks.md](./01_theory/03_building_blocks.md) (из чего собирать).
 2. Разберите две полные задачи-эталона: [04_example_url_shortener.md](./01_theory/04_example_url_shortener.md) и [05_example_news_feed.md](./01_theory/05_example_news_feed.md) — они показывают методологию в действии.
 3. Пробегите наброски остальных задач в [06_more_problems.md](./01_theory/06_more_problems.md) и найдите «центральное решение» каждой.
-4. Запустите примеры через `go run` (офлайн, без внешних зависимостей и `go.mod`):
+4. Запустите примеры через `go run` (офлайн, только stdlib; работает корневой `go.mod` репозитория):
    ```bash
    go run ./02_examples/01_base62_shortener/main.go
    go run ./02_examples/02_capacity_estimation/main.go

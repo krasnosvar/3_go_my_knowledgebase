@@ -28,7 +28,7 @@
 ## 🚀 Как проходить тему
 
 1. Прочитайте теорию по подтемам в [01_theory/](./01_theory/), начиная с [01_load_balancing.md](./01_theory/01_load_balancing.md).
-2. Запустите и изучите примеры из папки `02_examples/` через `go run` (всё офлайн, только stdlib, без `go.mod`):
+2. Запустите и изучите примеры из папки `02_examples/` через `go run` (всё офлайн, только stdlib; работает корневой `go.mod` репозитория):
    ```bash
    go run ./02_examples/01_token_bucket/main.go
    ```

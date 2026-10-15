@@ -13,7 +13,7 @@ go run ./03_exercises/01_token_bucket_allow/main.go
 Запуск эталонного решения:
 
 ```bash
-go run ./04_exercises_answers/01_token_bucket_allow/main.go
+go run ./04_exercises_answers/01_token_bucket_allow_answers/main.go
 ```
 
 ## Список задач (от простого к сложному)

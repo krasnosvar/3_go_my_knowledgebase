@@ -1,12 +1,20 @@
 # Тема 11. Хеш-таблицы (Maps)
 
-Этот раздел посвящен детальному изучению хеш-таблиц (`map[K]V`) в Go: их внутреннему устройству (`hmap`), неадресуемости значений, утечкам памяти при удалении ключей и защите от race conditions.
+Этот раздел посвящен детальному изучению хеш-таблиц (`map[K]V`) в Go: их внутреннему устройству (Swiss tables в Go 1.24+, `hmap` до Go 1.24), неадресуемости значений, утечкам памяти при удалении ключей и защите от race conditions.
+
+## 📋 Пререквизиты
+
+*   Пройдена предыдущая тема: [10_strings](../10_strings/).
+
+> ⏩ **Забегание вперёд.** Некоторые примеры и упражнения используют конструкции из следующих тем:
+> *   `06_maps_concurrency` и пример `03_product_backend` используют горутины и `sync` — подробно в [3_concurrency/04_sync_package](../../3_concurrency/04_sync_package/).
+> *   `08_maps_lru_cache` использует двусвязный список `container/list` — см. [8_algorithms_dsa/01_linked_list](../../8_algorithms_dsa/01_linked_list/).
 
 ## 🗂 Структура раздела
 
 *   **[01_theory/](./01_theory/)** — теория, разбитая по подтемам:
     *   [01_basics_operations.md](./01_theory/01_basics_operations.md) — основы: объявление `map[K]V`, инициализация через `make`/литерал, nil map, запись и чтение, comma-ok, `delete`, случайный порядок обхода.
-    *   [02_internals_hmap.md](./01_theory/02_internals_hmap.md) — внутреннее устройство: структура `hmap`, бакеты `bmap` и `tophash`, overflow buckets, эвакуация/рехэшинг, рандомизация порядка обхода.
+    *   [02_internals_hmap.md](./01_theory/02_internals_hmap.md) — внутреннее устройство: Swiss tables (Go 1.24+) и историческая схема `hmap` (до Go 1.24) — бакеты `bmap`, `tophash`, overflow buckets, эвакуация; рандомизация порядка обхода.
     *   [03_unaddressability.md](./01_theory/03_unaddressability.md) — неадресуемость значений мапы: почему нельзя `&m[k]` и `m[k].Field = ...`, и как это обойти.
     *   [04_memory_delete.md](./01_theory/04_memory_delete.md) — почему `delete` не возвращает память ОС и как делать ручную усадку мапы пересозданием.
     *   [05_concurrency.md](./01_theory/05_concurrency.md) — небезопасность конкурентного доступа, защита через `sync.RWMutex` и когда уместен `sync.Map`.
@@ -38,3 +46,7 @@
    go run ./03_exercises/08_maps_lru_cache/main.go
    ```
 4. Сверьтесь с эталонными ответами в `04_exercises_answers/`.
+
+## ➡️ Что дальше
+
+Когда все упражнения темы печатают `PASS`, переходите к теме [12_errors](../12_errors/).

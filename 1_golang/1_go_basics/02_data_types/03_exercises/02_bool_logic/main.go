@@ -14,26 +14,42 @@ func canAccess(admin, active bool) bool {
 func main() {
 	fmt.Println("--- Проверка 02_bool_logic ---")
 
-	tests := []struct {
-		admin  bool
-		active bool
-		want   bool
-	}{
-		{true, true, true},
-		{true, false, false},
-		{false, true, false},
-		{false, false, false},
+	allPassed := true
+
+	// Тест 1
+	got := canAccess(true, true)
+	if got == true {
+		fmt.Printf("Тест 1 (admin=%t, active=%t): PASS\n", true, true)
+	} else {
+		fmt.Printf("Тест 1 (admin=%t, active=%t): FAIL (ожидалось %t, получено %t)\n", true, true, true, got)
+		allPassed = false
 	}
 
-	allPassed := true
-	for i, tt := range tests {
-		got := canAccess(tt.admin, tt.active)
-		if got == tt.want {
-			fmt.Printf("Тест %d (admin=%t, active=%t): PASS\n", i+1, tt.admin, tt.active)
-		} else {
-			fmt.Printf("Тест %d (admin=%t, active=%t): FAIL (ожидалось %t, получено %t)\n", i+1, tt.admin, tt.active, tt.want, got)
-			allPassed = false
-		}
+	// Тест 2
+	got = canAccess(true, false)
+	if got == false {
+		fmt.Printf("Тест 2 (admin=%t, active=%t): PASS\n", true, false)
+	} else {
+		fmt.Printf("Тест 2 (admin=%t, active=%t): FAIL (ожидалось %t, получено %t)\n", true, false, false, got)
+		allPassed = false
+	}
+
+	// Тест 3
+	got = canAccess(false, true)
+	if got == false {
+		fmt.Printf("Тест 3 (admin=%t, active=%t): PASS\n", false, true)
+	} else {
+		fmt.Printf("Тест 3 (admin=%t, active=%t): FAIL (ожидалось %t, получено %t)\n", false, true, false, got)
+		allPassed = false
+	}
+
+	// Тест 4
+	got = canAccess(false, false)
+	if got == false {
+		fmt.Printf("Тест 4 (admin=%t, active=%t): PASS\n", false, false)
+	} else {
+		fmt.Printf("Тест 4 (admin=%t, active=%t): FAIL (ожидалось %t, получено %t)\n", false, false, false, got)
+		allPassed = false
 	}
 
 	if allPassed {

@@ -1,5 +1,7 @@
 # Практика SQL JOIN — 5 задач с нарастающей сложностью
 
+Первая и самая простая практика по PostgreSQL. Нужен только Docker: у задания свой маленький стенд (`docker-compose.yml` + `init.sql`, порт `5433`), основной стенд из [../../docker_compose/](../../docker_compose/README.md) не требуется. Теория — разделы JOIN в [../../postgres_sql_theory.md](../../postgres_sql_theory.md).
+
 ## Быстрый старт
 
 ```bash
@@ -61,3 +63,7 @@ clients ──< orders ───────────────────
 - **ON vs WHERE в LEFT JOIN** — критичная разница
 - **Fan-out problem** — дублирование при множественных JOIN'ах
 - **3 способа найти "без связей"** — LEFT JOIN+IS NULL / NOT EXISTS / NOT IN
+
+## Когда дальше
+
+Следующая практика — индексы: [../3_indexes_tasks/](../3_indexes_tasks/README.md).

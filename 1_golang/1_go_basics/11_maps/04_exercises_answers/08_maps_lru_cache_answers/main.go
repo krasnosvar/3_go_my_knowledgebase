@@ -5,82 +5,77 @@ import (
 	"fmt"
 )
 
-/*
-	ОТВЕТЫ К ЗАДАНИЮ 8 (LRU Cache)
-*/
-
-// ================= РЕШЕНИЕ =================
-
-type LRUCache struct {
-	capacity int
-	list     *list.List
-	cache    map[int]*list.Element // Храним указатель на элемент списка для быстрого доступа
-}
-
-// Элемент, который мы будем хранить внутри Value списка (чтобы при удалении с конца знать, КАКОЙ ключ удалить из мапы)
 type entry struct {
 	key   int
 	value int
 }
 
+type LRUCache struct {
+	capacity  int
+	evictList *list.List
+	items     map[int]*list.Element
+}
+
 func NewLRU(capacity int) *LRUCache {
 	return &LRUCache{
-		capacity: capacity,
-		list:     list.New(),
-		cache:    make(map[int]*list.Element),
+		capacity:  capacity,
+		evictList: list.New(),
+		items:     make(map[int]*list.Element),
 	}
 }
 
 func (l *LRUCache) Get(key int) int {
-	if element, ok := l.cache[key]; ok {
-		// Ключ найден. Перемещаем элемент списка вперед (помечаем как "свежий")
-		l.list.MoveToFront(element)
-		// Возвращаем само значение из структуры entry
-		return element.Value.(*entry).value
+	if elem, ok := l.items[key]; ok {
+		l.evictList.MoveToFront(elem)
+		return elem.Value.(*entry).value
 	}
 	return -1
 }
 
-func (l *LRUCache) Put(key int, value int) {
-	if element, ok := l.cache[key]; ok {
-		// Ключ уже есть. Обновляем значение и делаем "свежим".
-		l.list.MoveToFront(element)
-		element.Value.(*entry).value = value
+func (l *LRUCache) Put(key, value int) {
+	if elem, ok := l.items[key]; ok {
+		l.evictList.MoveToFront(elem)
+		elem.Value.(*entry).value = value
 		return
 	}
 
-	// Ключа нет. Создаем новый элемент в начале списка (самый "свежий")
-	newEntry := &entry{key, value}
-	element := l.list.PushFront(newEntry)
-	l.cache[key] = element
+	elem := l.evictList.PushFront(&entry{key: key, value: value})
+	l.items[key] = elem
 
-	// Проверяем capacity
-	if l.list.Len() > l.capacity {
-		// Если переполнен, удаляем самый старый элемент (с конца списка)
-		oldest := l.list.Back()
-		if oldest != nil {
-			// Удаляем из списка
-			l.list.Remove(oldest)
-			// Извлекаем ключ этого старого элемента и удаляем его же из мапы
-			deleteKey := oldest.Value.(*entry).key
-			delete(l.cache, deleteKey)
+	if l.evictList.Len() > l.capacity {
+		last := l.evictList.Back()
+		if last != nil {
+			l.evictList.Remove(last)
+			delete(l.items, last.Value.(*entry).key)
 		}
 	}
 }
 
-// ===========================================
-
 func main() {
+	fmt.Println("--- Проверка 08_maps_lru_cache (Решение) ---")
+
 	lru := NewLRU(2)
-	lru.Put(1, 1)           // cache is {1=1}
-	lru.Put(2, 2)           // cache is {1=1, 2=2}
-	fmt.Println(lru.Get(1)) // return 1, cache is {2=2, 1=1}
+	if lru == nil {
+		fmt.Println("Тест LRU Cache: FAIL (NewLRU вернул nil)")
+		return
+	}
 
-	lru.Put(3, 3)           // evicts key 2, cache is {1=1, 3=3}
-	fmt.Println(lru.Get(2)) // return -1 (not found)
+	lru.Put(1, 10)
+	lru.Put(2, 20)
 
-	lru.Put(4, 4)           // evicts key 1, cache is {3=3, 4=4}
-	fmt.Println(lru.Get(1)) // return -1 (not found)
-	fmt.Println(lru.Get(3)) // return 3
-	fmt.Println(lru.Get(4)) // return 4
+	t1 := lru.Get(1) == 10
+
+	lru.Put(3, 30)
+	t2 := lru.Get(2) == -1
+	t3 := lru.Get(3) == 30
+
+	lru.Put(4, 40)
+	t4 := lru.Get(1) == -1
+	t5 := lru.Get(4) == 40
+
+	if t1 && t2 && t3 && t4 && t5 {
+		fmt.Println("Тест LRU Cache: PASS")
+	} else {
+		fmt.Printf("Тест LRU Cache: FAIL (t1=%t, t2=%t, t3=%t, t4=%t, t5=%t)\n", t1, t2, t3, t4, t5)
+	}
 }

@@ -1,3 +1,0 @@
-# Упражнения: Stack and Queue (Go)
-
-Запуск: `go run ./03_exercises/01_push_pop` ...

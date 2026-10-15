@@ -1,3 +1,6 @@
+// ⏩ Забегание вперёд: горутины и sync.Mutex разбираются в 3_concurrency (01_goroutines, 04_sync_package);
+// методы — в 2_oop/01_methods. Эту задачу можно отложить до прохождения этих тем.
+
 package main
 
 import (

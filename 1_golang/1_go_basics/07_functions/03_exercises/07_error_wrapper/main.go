@@ -8,7 +8,12 @@ import (
 // runSafely должна перехватить её через recover() и вернуть её описание в виде error.
 // Если паники не произошло, вернуть nil.
 func runSafely(task func()) (err error) {
-	// TODO: Реализуйте defer с recover() и перезаписью именованной переменной err.
+	// TODO: Сейчас defer + recover() только глушат панику, а err остаётся nil.
+	// Доработайте: если recover() вернул значение, запишите его описание
+	// в именованную переменную err (например, через fmt.Errorf("%v", r)).
+	defer func() {
+		_ = recover()
+	}()
 
 	task()
 	return nil

@@ -1,3 +1,0 @@
-# Упражнения: type_assertions_switches
-
-Запуск: `go run ./03_exercises/01_assertion_ok` ...

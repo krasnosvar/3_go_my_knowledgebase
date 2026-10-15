@@ -79,7 +79,7 @@ hash, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 err := bcrypt.CompareHashAndPassword(hash, []byte(input))
 ```
 
-## Защита от брute-force
+## Защита от brute-force
 
 - Rate limit на login endpoint (per-IP и per-user).
 - CAPTCHA после N неудачных попыток.

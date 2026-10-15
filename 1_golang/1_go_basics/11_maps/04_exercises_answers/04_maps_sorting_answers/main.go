@@ -2,76 +2,43 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"slices"
 )
 
-/*
-	ОТВЕТЫ К ЗАДАНИЮ 4
-*/
-
-func main() {
-	fmt.Println("--- Task 1: Вывод ключей по алфавиту ---")
-	task1_sorted_keys()
-
-	fmt.Println("\n--- Task 2: Подсчет частоты слов ---")
-	task2_word_freq()
-}
-
-func task1_sorted_keys() {
-	// ================= РЕШЕНИЕ: Task 1 =================
-	scores := map[string]int{
-		"Charlie": 80,
-		"Alice":   95,
-		"Bob":     85,
-	}
-
-	// 1. Создаем слайс нужной длины
-	keys := make([]string, 0, len(scores))
-
-	// 2. Заполняем его
-	for k := range scores {
+func getSortedValues(m map[string]int) []int {
+	keys := make([]string, 0, len(m))
+	for k := range m {
 		keys = append(keys, k)
 	}
+	slices.Sort(keys)
 
-	// 3. Сортируем
-	sort.Strings(keys)
-
-	// 4. Выводим
+	vals := make([]int, 0, len(m))
 	for _, k := range keys {
-		fmt.Printf("%s: %d\n", k, scores[k])
+		vals = append(vals, m[k])
 	}
-	// ====================================================
+	return vals
 }
 
-func task2_word_freq() {
-	// ================= РЕШЕНИЕ: Task 2 =================
-	words := []string{"go", "rust", "go", "java", "go", "rust"}
+func main() {
+	fmt.Println("--- Проверка 04_maps_sorting (Решение) ---")
 
-	freq := make(map[string]int)
-	for _, word := range words {
-		freq[word]++
+	m := map[string]int{
+		"charlie": 3,
+		"alice":   1,
+		"bob":     2,
 	}
 
-	fmt.Println("Частоты:", freq)
+	res := getSortedValues(m)
 
-	// Продвинутый уровень: Сортировка по значению
-	type kv struct {
-		Key   string
-		Value int
-	}
-	var ss []kv
-	for k, v := range freq {
-		ss = append(ss, kv{k, v})
+	t1 := len(res) == 3
+	t2 := false
+	if len(res) == 3 {
+		t2 = res[0] == 1 && res[1] == 2 && res[2] == 3
 	}
 
-	// Сортируем по убыванию значений
-	sort.Slice(ss, func(i, j int) bool {
-		return ss[i].Value > ss[j].Value
-	})
-
-	fmt.Println("Топ слова (сортировка по частоте):")
-	for _, kv := range ss {
-		fmt.Printf("%s: %d\n", kv.Key, kv.Value)
+	if t1 && t2 {
+		fmt.Println("Тест сортировки мапы: PASS")
+	} else {
+		fmt.Printf("Тест сортировки мапы: FAIL (получено: %v)\n", res)
 	}
-	// ====================================================
 }

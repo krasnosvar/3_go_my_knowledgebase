@@ -1,16 +1,37 @@
-# Compiler, modules, project layout
+# 7.3 Compiler, modules, project layout
 
-Раздел про инструменты сборки и структуру Go-проекта.
+Инструменты сборки и структура Go-проекта. Раздел теоретический: примеров
+и упражнений нет, команды из теории проверяйте у себя в терминале.
+
+## Зачем
+
+Чтобы понимать, откуда берутся `go build`, стандартная библиотека и
+runtime в бинарнике, как работают `go.mod`/`go.sum`, `replace`,
+workspace и vendor, и как разложить код проекта по пакетам.
+
+## Пререквизиты
+
+- установленный Go (см. раздел «0. Подготовка» в [корневом README](../../../README.md));
+- базовый опыт `go run` / `go build` из [1_go_basics](../../1_go_basics/).
 
 ## Что внутри
 
-- `01_go_src_file_structure.md` — что внутри Go-файла: package, imports, top-level декларации, init, видимость.
-- `02_modules.md` — `go.mod`, `go.sum`, версионирование, replace, workspace, vendor.
+- [01_go_src_file_structure.md](./01_go_src_file_structure.md) — структура установки Go (`GOROOT`): `bin/`, `src/`, `pkg/`, переменные окружения, процесс компиляции, что попадает в бинарник.
+- [02_modules.md](./02_modules.md) — модули: `go.mod`, `go.sum`, версионирование, `replace`, workspace, vendor.
+
+## Как проходить
+
+1. Прочитайте [01_go_src_file_structure.md](./01_go_src_file_structure.md) и найдите описанные каталоги у себя: `ls "$(go env GOROOT)"`.
+2. Прочитайте [02_modules.md](./02_modules.md) и посмотрите на `go.mod` в корне этого репозитория — это один модуль, в который входят все примеры и упражнения.
 
 ## Связанные темы
 
-- `4_standard_library` — пакеты stdlib, которые часто используются вместе.
-- `7_under_the_hood/01_runtime` — что компилятор делает с твоим кодом.
+- [4_standard_library](../../4_standard_library/) — пакеты stdlib, которые часто используются вместе.
+- [01_runtime](../01_runtime/) — что runtime делает с твоим кодом.
+
+## Дальше
+
+[04_profiling](../04_profiling/) — профилирование.
 
 ## Команды-минимум
 

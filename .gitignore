@@ -18,7 +18,7 @@ dist/
 coverage.out
 
 # Common local binaries produced by `go build`
-crud-service
+**/crud-service/crud-service
 
 # Local Docker/database data
 clickhouse_data/

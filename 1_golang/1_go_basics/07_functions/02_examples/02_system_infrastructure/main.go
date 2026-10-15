@@ -1,3 +1,5 @@
+// ⏩ Забегание вперёд: горутины (go func) разбираются в 3_concurrency/01_goroutines.
+
 package main
 
 import (

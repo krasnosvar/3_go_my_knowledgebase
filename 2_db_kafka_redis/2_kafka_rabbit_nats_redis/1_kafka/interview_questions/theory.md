@@ -692,8 +692,8 @@ func (h *ConsumerHandler) ConsumeClaim(session sarama.ConsumerGroupSession, clai
 │  └──────────┘  └──────────┘  └──────────┘         │
 │       │             │             │                │
 │       └─────────────┴─────────────┘                │
-│              Zookeeper                             │
-│           (или KRaft mode)                         │
+│        KRaft controllers (метаданные)              │
+│     (до Kafka 4.0 — опционально ZooKeeper)         │
 └────────────────────────────────────────────────────┘
 
 Broker — это сервер Kafka
@@ -701,6 +701,8 @@ Broker — это сервер Kafka
 • Обрабатывает read/write запросы
 • Координируется с другими брокерами
 ```
+
+> **KRaft vs ZooKeeper.** Исторически метаданные кластера (список брокеров, топики, выбор контроллера) хранились в ZooKeeper. Начиная с Kafka 3.3 production-ready стал режим KRaft (Kafka Raft): метаданные хранят сами брокеры/контроллеры по протоколу Raft. В Kafka 4.0 поддержка ZooKeeper удалена полностью — работает только KRaft. На собеседовании про ZooKeeper стоит говорить как про устаревшую схему (и про миграцию ZooKeeper → KRaft на версиях 3.x).
 
 ### Replication (Репликация)
 

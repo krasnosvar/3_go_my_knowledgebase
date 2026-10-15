@@ -10,11 +10,14 @@ testing, runtime, real-world backend-практик и алгоритмов.
 - `01_theory/` — краткая теория;
 - `02_examples/` — runnable-примеры;
 - `03_exercises/` — упражнения;
-- `04_exercises_answers/` — решения для самопроверки;
+- `04_exercises_answers/` — решения для самопроверки (`NN_name_answers/`);
 - `README.md` — навигация по теме.
 
-Упражнения могут содержать `TODO`: это стартовое состояние задачи. Готовые
-варианты лежат рядом в `04_exercises_answers/`.
+Упражнения содержат `TODO` и встроенную самопроверку: в стартовом состоянии
+они компилируются и печатают `FAIL`, после решения — `PASS`. Готовые варианты
+лежат рядом в `04_exercises_answers/`. Запуск — из папки темы:
+`go run ./03_exercises/01_xxx` (как установить Go — см. раздел
+«0. Подготовка» в [корневом README](../README.md)).
 
 ## Разделы
 
@@ -35,7 +38,7 @@ testing, runtime, real-world backend-практик и алгоритмов.
 7. [7_under_the_hood](./7_under_the_hood/) — runtime, scheduler, memory,
    GC, compiler, modules, profiling, reflection, `unsafe`.
 8. [8_algorithms_dsa](./8_algorithms_dsa/) — linked list, stack/queue, set,
-   trees/heaps, graphs, leetcode-style patterns и legacy-материалы.
+   trees/heaps, graphs, leetcode-style patterns и архив дополнительных задач.
 
 ## Как проходить
 
@@ -47,14 +50,16 @@ testing, runtime, real-world backend-практик и алгоритмов.
 4. После базы идти в `6_real_world_go_usage` и `7_under_the_hood`.
 5. `8_algorithms_dsa` использовать как отдельный блок для задач и интервью.
 
-## Проверка тестового раздела
+## Проверка
 
-В разделе testing есть отдельный Go-модуль:
+Весь раздел входит в корневой Go-модуль репозитория:
 
 ```bash
-cd 5_testing
-go test ./...
+go vet ./1_golang/...
+go test ./1_golang/5_testing/.../02_examples/... ./1_golang/5_testing/.../04_exercises_answers/...
 ```
+
+Заготовки `5_testing/*/03_exercises` падают в `go test` намеренно — до решения.
 
 ## Критерии качества темы
 
