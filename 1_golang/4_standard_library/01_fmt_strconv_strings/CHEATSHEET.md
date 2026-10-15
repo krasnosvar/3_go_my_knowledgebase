@@ -50,7 +50,7 @@
 | string → float | `strconv.ParseFloat("3.14", 64)` | `3.14` |
 | float → string | `strconv.FormatFloat(3.14159, 'f', 2, 64)` | `"3.14"` (`'e'`, `'g'`; точность `-1` = минимум) |
 | bool | `strconv.ParseBool("t")` / `FormatBool(true)` | `"1" "t" "true"` → `true` |
-| Кавычки | `strconv.Quote(`a"b`)` / `Unquote` | `"a\"b"` |
+| Кавычки | ``strconv.Quote(`a"b`)`` / `Unquote` | `"a\"b"` |
 | Разбор ошибки | `var ne *strconv.NumError; errors.As(err, &ne)` | `ne.Num`, `ne.Err` (`strconv.ErrSyntax`, `ErrRange`) |
 
 | Задача | Быстро | Медленно |

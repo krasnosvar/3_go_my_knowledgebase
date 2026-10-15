@@ -2,6 +2,8 @@
 
 Метод — функция, привязанная к типу через receiver. На методах держится всё «ООП» в Go: инкапсуляция поведения рядом с данными, реализация интерфейсов, конструкторы `NewXxx`. Главное в теме — понять разницу value/pointer receiver и method set: от неё зависит, меняется ли состояние и реализует ли тип интерфейс.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — синтаксис, value vs pointer receiver, method set и addressability, стиль, ловушки.
+
 ## Пререквизиты
 
 [1_go_basics](../../1_go_basics/): особенно [06_pointers](../../1_go_basics/06_pointers/), [07_functions](../../1_go_basics/07_functions/) и [08_structs](../../1_go_basics/08_structs/). Для упражнения 08 — ошибки из [12_errors](../../1_go_basics/12_errors/).

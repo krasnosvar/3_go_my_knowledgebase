@@ -2,6 +2,8 @@
 
 Generics (Go 1.18+) позволяют писать функции и типы, работающие с разными типами без `any` и без копипасты: `Map`/`Filter`, контейнеры, репозитории. Тема разбирает type parameters, constraints (`any`, `comparable`, `cmp.Ordered`, свои union с `~`), обобщённые структуры и интерфейсы и — важно — когда generics НЕ нужны.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — type parameters, constraints (`comparable`, `cmp.Ordered`, `~`), generic типы и интерфейсы, когда generics не нужны, ловушки.
+
 ## Пререквизиты
 
 [02_interfaces](../02_interfaces/) (constraint — это интерфейс) и [04_type_assertions_switches](../04_type_assertions_switches/); слайсы и map — [1_go_basics/09_slices](../../1_go_basics/09_slices/), [11_maps](../../1_go_basics/11_maps/).

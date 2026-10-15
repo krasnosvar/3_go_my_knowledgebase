@@ -4,6 +4,8 @@
 
 Apache Kafka — распределённый лог событий: топики и партиции, offsets, consumer groups, репликация. Основа асинхронного взаимодействия сервисов и стриминга данных.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — модель данных, `acks`, commit offset, consumer groups и rebalance, семантики доставки, retention/compaction, CLI стенда, ловушки.
+
 ## Пререквизиты
 
 - Docker (с `docker compose`), Go 1.22+.

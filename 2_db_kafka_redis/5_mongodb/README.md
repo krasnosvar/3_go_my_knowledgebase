@@ -4,6 +4,8 @@
 
 MongoDB — документная NoSQL-база: коллекции и документы, индексы, репликация и шардирование. Полезно понимать, чем документная модель отличается от реляционной и когда она уместна.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — CRUD в mongosh и Go, `bson.M`/`bson.D`, типы индексов и ESR, aggregation, embedding vs referencing, read preference и write concern, shard key, ловушки.
+
 ## Пререквизиты
 
 - Docker (с `docker compose`), Go 1.22+.

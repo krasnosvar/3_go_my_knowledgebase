@@ -4,6 +4,8 @@
 
 Redis — in-memory хранилище: кэш, счётчики, rate limiting, блокировки, очереди. Конспект покрывает структуры данных, TTL, персистентность (RDB/AOF), репликацию и cluster, политики вытеснения.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — выбор типа данных, команды redis-cli и go-redis, TTL, eviction, транзакции/Lua/pipeline, паттерны, RDB vs AOF, Cluster, ловушки.
+
 ## Пререквизиты
 
 - Docker (с `docker compose`), Go 1.22+.
