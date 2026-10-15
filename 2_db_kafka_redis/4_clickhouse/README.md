@@ -4,6 +4,8 @@
 
 ClickHouse — колоночная аналитическая (OLAP) СУБД: движки MergeTree, parts и merges, партиционирование, distributed-таблицы. Нужна, когда надо быстро агрегировать миллиарды строк.
 
+**Уже знакомы с темой?** → [CHEATSHEET.md](./CHEATSHEET.md) — стенд и клиенты, движки MergeTree, ORDER BY/PARTITION BY, батчи и parts, materialized views, ловушки.
+
 ## Пререквизиты
 
 - Docker (с `docker compose`), Go 1.22+.
