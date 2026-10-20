@@ -1,7 +1,8 @@
 # Go Backend Knowledge Base
 
-Учебная база по Go backend-разработке: язык, стандартная библиотека, конкурентность,
-runtime, базы данных, брокеры сообщений, system design и базовые темы Computer Science.
+Учебная база по Go backend-разработке: язык, стандартная библиотека,
+конкурентность, runtime, базы данных, брокеры сообщений, прикладной system
+design и базовые темы Computer Science.
 
 Материалы собраны как практический roadmap: краткая теория, runnable-примеры,
 упражнения и решения для самопроверки.
@@ -9,7 +10,7 @@ runtime, базы данных, брокеры сообщений, system design
 ## 0. Подготовка
 
 1. Установите Go **1.22 или новее** (корневой `go.mod` требует `go 1.22`;
-   часть теории описывает изменения до Go 1.24+): <https://go.dev/doc/install>.
+   часть теории описывает изменения до Go 1.25+): <https://go.dev/doc/install>.
    Проверка: `go version`.
 2. Клонируйте репозиторий. В корне лежит единый `go.mod`, поэтому любой
    пример или упражнение запускается через `go run` по пути к папке —
@@ -28,7 +29,8 @@ runtime, базы данных, брокеры сообщений, system design
    в стартовом состоянии оно компилируется и печатает `FAIL`, ваша цель —
    довести до `PASS`. Решение лежит в `04_exercises_answers/NN_name_answers/`.
 4. Раздел `5_testing` учит писать тесты: там упражнения — `*_test.go`-заготовки,
-   которые падают (`go test` → FAIL), пока тест не написан; примеры и ответы проходят:
+   которые падают (`go test` → FAIL), пока тест не написан; примеры и ответы
+   проходят:
    `go test ./1_golang/5_testing/01_unit_tests/02_examples/...`.
 5. Для части 2 ([2_db_kafka_redis](./2_db_kafka_redis/)) нужны **Docker** и
    **Docker Compose v2** (`docker compose ...`): PostgreSQL, Kafka, Redis,
@@ -39,13 +41,15 @@ runtime, базы данных, брокеры сообщений, system design
 
 ## Структура
 
-- [1_golang](./1_golang/) — Go от базового синтаксиса до runtime, testing,
-  real-world backend-паттернов и алгоритмов.
-- [2_db_kafka_redis](./2_db_kafka_redis/) — PostgreSQL, Kafka, Redis, ClickHouse,
-  MongoDB, Docker Compose стенды и практические задания.
-- [3_system_design](./3_system_design/) — сеть, API styles, кэширование,
-  масштабирование данных, messaging, архитектура, reliability, observability
-  и подготовка к system design интервью.
+- [1_golang](./1_golang/) — Go от базового синтаксиса и ООП (включая SOLID и
+  паттерны проектирования) до конкурентности, runtime, testing, real-world
+  backend-паттернов и алгоритмов.
+- [2_db_kafka_redis](./2_db_kafka_redis/) — PostgreSQL, Kafka, Redis,
+  ClickHouse, MongoDB, Docker Compose стенды и практические задания.
+- [3_system_design](./3_system_design/) — прикладной System Design для
+  Go-бэкенда (в связке с канонической базой DevOps/SRE): архитектура сервисов
+  и API, производительность и кэширование, распределённые компоненты и сквозные
+  кейсы собеседований.
 - [other](./other/) — небольшие заметки по общим темам: кодировки, endianness,
   сериализация, процессы, сигналы, время и часовые пояса.
 
@@ -87,6 +91,7 @@ runtime, базы данных, брокеры сообщений, system design
 - [03. Встраивание](./1_golang/2_oop/03_embedding/CHEATSHEET.md)
 - [04. Type assertions и type switches](./1_golang/2_oop/04_type_assertions_switches/CHEATSHEET.md)
 - [05. Generics](./1_golang/2_oop/05_generics/CHEATSHEET.md)
+- [06. SOLID и паттерны проектирования](./1_golang/2_oop/06_solid_and_design_patterns/CHEATSHEET.md)
 
 **1. Go — конкурентность**
 - [01. Горутины](./1_golang/3_concurrency/01_goroutines/CHEATSHEET.md)
@@ -117,17 +122,11 @@ runtime, базы данных, брокеры сообщений, system design
 - [ClickHouse](./2_db_kafka_redis/4_clickhouse/CHEATSHEET.md)
 - [MongoDB](./2_db_kafka_redis/5_mongodb/CHEATSHEET.md)
 
-**3. System design**
-- [01. Networking](./3_system_design/01_networking/CHEATSHEET.md)
-- [02. API Styles](./3_system_design/02_api_styles/CHEATSHEET.md)
-- [03. Caching](./3_system_design/03_caching/CHEATSHEET.md)
-- [04. Data Scaling](./3_system_design/04_data_scaling/CHEATSHEET.md)
-- [05. Messaging](./3_system_design/05_messaging/CHEATSHEET.md)
-- [06. Architecture](./3_system_design/06_architecture/CHEATSHEET.md)
-- [07. Design Principles](./3_system_design/07_design_principles/CHEATSHEET.md)
-- [08. Reliability & Scalability](./3_system_design/08_reliability_scalability/CHEATSHEET.md)
-- [09. Observability](./3_system_design/09_observability/CHEATSHEET.md)
-- [10. Design Interview](./3_system_design/10_design_interview/CHEATSHEET.md)
+**3. System design (Go)**
+- [01. Архитектура сервисов, сеть и API](./3_system_design/01_architecture_styles/CHEATSHEET.md)
+- [02. Производительность, наблюдаемость и кэширование](./3_system_design/02_performance_and_scaling/CHEATSHEET.md)
+- [03. Распределённые компоненты, очереди и отказоустойчивость](./3_system_design/03_distributed_components/CHEATSHEET.md)
+- [04. System Design интервью и сквозные кейсы](./3_system_design/04_case_studies/CHEATSHEET.md)
 
 **Разное**
 - [Computer Science basics (все заметки other/)](./other/CHEATSHEET.md)
@@ -138,8 +137,8 @@ runtime, базы данных, брокеры сообщений, system design
    конкурентность, стандартная библиотека и testing.
 2. После базового Go перейти к [2_db_kafka_redis](./2_db_kafka_redis/):
    SQL, индексы, транзакции, брокеры сообщений и кэши.
-3. Параллельно читать [3_system_design](./3_system_design/), чтобы связывать
-   код с архитектурными решениями: API, данные, очереди, отказоустойчивость,
+3. Параллельно изучать [3_system_design](./3_system_design/), чтобы связывать
+   Go-код с архитектурными решениями: API, данные, очереди, отказоустойчивость,
    наблюдаемость.
 4. Использовать [other](./other/) как справочник по темам, которые часто
    всплывают на собеседованиях и в системной разработке.
@@ -160,7 +159,10 @@ Go-проекты в `2_db_kafka_redis` — отдельные модули, п�
 ## Полезные ресурсы
 
 - [Go.dev](https://go.dev) — официальная документация Go.
-- [Go by Example](https://gobyexample.com) — короткие примеры по стандартным темам.
+- [Go by Example](https://gobyexample.com) — короткие примеры по стандартным
+  темам.
 - [Effective Go](https://go.dev/doc/effective_go) — идиомы и практики Go.
-- [The Go Programming Language](https://www.gopl.io/) — книга Донована и Кернигана.
-- [Exercism Go Track](https://exercism.org/tracks/go) — практические упражнения.
+- [The Go Programming Language](https://www.gopl.io/) — книга Донована и
+  Кернигана.
+- [Exercism Go Track](https://exercism.org/tracks/go) — практические
+  упражнения.

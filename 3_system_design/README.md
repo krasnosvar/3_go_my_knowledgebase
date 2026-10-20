@@ -1,42 +1,67 @@
-# System Design Knowledge Base
+# Раздел 3. Прикладной System Design в Go (System Design)
 
-Этот раздел — личная база для системного изучения System Design: сеть, API, кэширование, масштабирование данных, обмен сообщениями, архитектура, принципы проектирования, надёжность, наблюдаемость и подготовка к system design интервью.
+## О чём эта тема (краткий контекст)
 
-Акцент — на практике, применимой в Go-бэкенде: не абстрактная теория, а то, что реально помогает проектировать сервисы и проходить собеседования.
+System Design отвечает на вопрос, как из отдельных сервисов, баз данных, кэшей
+и очередей собрать систему, которая выдерживает высокую нагрузку, переживает
+отказы узлов и остаётся поддерживаемой. В этом разделе мы не дублируем общую
+платформенную теорию, а фокусируемся на том, как архитектурные паттерны
+реализуются и эксплуатируются непосредственно в коде и рантайме **Go**.
 
-## Формат подтем
+> **Базовая теория и инфраструктурный фундамент (DevOps / SRE):**
+> Полный разбор концепции, базовые определения, схемы, алгоритмы и
+> платформенные компромиссы вынесены в канонический раздел:
+> - [Раздел 14. System Design и Высоконагруженные Системы (DevOps / SRE)](../../5_devops_sre_knowledgebase/14_system_design/README.md)
+>
+> **Фокус этого урока:** здесь мы не дублируем общую теорию, а разбираем
+> исключительно особенности реализации и эксплуатации в экосистеме
+> **Go** (планировщик G-M-P, сборщик мусора, netpoll, стандартная
+> библиотека и идиомы языка).
 
-Каждая подтема устроена одинаково:
+## Формат подразделов
 
-- `01_theory/` — краткая теория по подтемам (без воды);
-- `02_examples/` — runnable-примеры (только stdlib);
-- `03_exercises/` — упражнения от простого к сложному с самопроверкой `PASS`/`FAIL`;
-- `04_exercises_answers/` — эталонные решения (`NN_name_answers/`).
+Каждая тема устроена по единому шаблону:
+
+- `01_theory/` — теория Go-специфики со ссылками на фундаментальную базу DevOps;
+- `02_examples/` — самодостаточные runnable-примеры на стандартной библиотеке;
+- `03_exercises/` — практические задачи с автопроверкой `PASS`/`FAIL`;
+- `04_exercises_answers/` — эталонные решения (`NN_name_answers/`);
+- `CHEATSHEET.md` — плотная шпаргалка для быстрого повторения.
 
 ## Пререквизиты
 
-- Пройдены [1_go_basics](../1_golang/1_go_basics/) и [2_oop](../1_golang/2_oop/); для 05/08 полезны [3_concurrency](../1_golang/3_concurrency/).
-- Примеры и упражнения запускаются из папки подтемы: `go run ./03_exercises/01_.../main.go`.
+- Пройдены [1_go_basics](../1_golang/1_go_basics/),
+  [2_oop](../1_golang/2_oop/) (включая
+  [06_solid_and_design_patterns](../1_golang/2_oop/06_solid_and_design_patterns/))
+  и [3_concurrency](../1_golang/3_concurrency/).
+- Примеры и упражнения запускаются из папки подтемы или из корня репозитория:
+  `go run ./3_system_design/01_architecture_styles/02_examples/01_dependency_injection/main.go`.
 
 ## Подразделы
 
-1. [01_networking](01_networking/) — сеть: TCP/UDP, модель OSI/TCP-IP, HTTP/HTTPS, HTTP/2 и HTTP/3, DNS, TLS.
-2. [02_api_styles](02_api_styles/) — стили API: REST, gRPC, Protobuf, GraphQL и выбор между ними.
-3. [03_caching](03_caching/) — кэширование: паттерны, TTL/eviction, типичные проблемы, Redis как кэш.
-4. [04_data_scaling](04_data_scaling/) — масштабирование данных: репликация, шардирование, CAP, согласованность, SQL vs NoSQL.
-5. [05_messaging](05_messaging/) — обмен сообщениями: очереди и брокеры, гарантии доставки, outbox/inbox, backpressure.
-6. [06_architecture](06_architecture/) — архитектура: монолит vs микросервисы, Clean Architecture, DDD, DI, API Gateway.
-7. [07_design_principles](07_design_principles/) — принципы проектирования: SOLID, DRY/KISS/YAGNI, паттерны, 12-factor.
-8. [08_reliability_scalability](08_reliability_scalability/) — надёжность и масштабируемость: балансировка, rate limiting, circuit breaker, retries, graceful shutdown.
-9. [09_observability](09_observability/) — наблюдаемость: логи, метрики (RED/USE), трейсинг, пробы, алертинг.
-10. [10_design_interview](10_design_interview/) — подход к system design интервью и список типовых задач.
+1. [01_architecture_styles](./01_architecture_styles/) — модульный монолит и
+   микросервисы в Go (`cmd/`, `internal/`), Clean Architecture, Hexagonal
+   (Ports & Adapters), тактический DDD, утиная типизация интерфейсов, рантайм
+   `netpoll`, тюнинг `http.Server`/`http.Transport`, REST (`encoding/json`) vs
+   `grpc-go` и Protobuf.
+2. [02_performance_and_scaling](./02_performance_and_scaling/) — планировщик
+   `G-M-P`, настройка `GOMAXPROCS` (защита от CFS CPU throttling в контейнерах)
+   и `GOMEMLIMIT`, escape analysis, боевое профилирование (`net/http/pprof`,
+   `runtime/trace`), структурные логи `log/slog`, потокобезопасный L1-кэш,
+   `singleflight` и обход пауз GC на больших кэшах.
+3. [03_distributed_components](./03_distributed_components/) — пул соединений
+   `database/sql` (`MaxOpenConns`, `MaxIdleConns`), роутинг на реплики и
+   Consistent Hashing, Transactional Outbox, идемпотентные консьюмеры,
+   естественный backpressure на каналах и `errgroup`, Rate Limiting, Circuit
+   Breaker, Retries с jitter и Graceful Shutdown по `SIGTERM`.
+4. [04_case_studies](./04_case_studies/) — опорные числа рантайма Go для
+   расчётов ёмкости на System Design интервью и реализация ключевых узлов
+   четырёх сквозных кейсов: Денежные переводы, Медиа-галерея, URL Shortener и
+   News Feed.
 
 ## 🚀 Как проходить
 
-- Идти по порядку от `01_networking` к `10_design_interview`: фундамент (сеть, API) → данные и сообщения → архитектура и принципы → эксплуатация (надёжность, наблюдаемость) → интервью.
-- Разделы 01–02 — база, на которую опирается всё остальное; не пропускать.
-- Разделы 03–05 — как масштабировать состояние и связывать сервисы.
-- Разделы 06–07 — как раскладывать код и сервисы по границам.
-- Разделы 08–09 — что нужно, чтобы система жила в проде.
-- Раздел 10 — сборка всего вместе: тренировка на типовых задачах.
-
+Идите последовательно от `01_architecture_styles` к `04_case_studies`: сначала
+устройство отдельного Go-сервиса и его сетевого слоя → затем производительность
+рантайма, профилирование и кэширование → затем распределённые данные, очереди и
+отказоустойчивость → и в финале сборка сквозных систем.

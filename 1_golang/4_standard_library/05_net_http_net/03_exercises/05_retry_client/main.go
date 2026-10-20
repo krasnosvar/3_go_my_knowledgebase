@@ -9,7 +9,7 @@
 //
 // 4xx не повторяем: это ошибка клиента, повтор не поможет.
 // В реальном коде пауза растёт экспоненциально и с jitter — см.
-// 3_system_design/08_reliability_scalability.
+// 3_system_design/03_distributed_components.
 //
 // Запуск: go run ./03_exercises/05_retry_client/main.go
 package main
